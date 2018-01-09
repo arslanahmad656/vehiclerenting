@@ -1,0 +1,80 @@
+﻿.nav-container {
+    vertical-align: top;
+    margin-right: 0;
+    margin-left: auto;
+    text-align: right;
+}
+
+.nav-main ul {
+    list-style: none;
+}
+
+.nav-container ul li {
+    display: inline-block;
+}
+
+.nav-main ul li {
+    border-right: 1px solid #000;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-right: 3em;
+}
+
+.nav-main ul li:last-child {
+    border-right: none;
+}
+
+.nav-container ul li a {
+    text-decoration: none;
+    display: inline-block;
+    color: black;
+}
+
+.nav-main ul li a {
+    padding-right: 2.5em;
+    padding-left: 0.5em;
+    padding-top: 0.75em;
+    padding-bottom: 0.75em;
+    transition: color 0.5s;
+    -webkit-transition: color 0.5s;
+}
+
+.nav-main ul li a.active {
+    color: rgb(35, 97, 136);
+}
+
+.nav-main ul li a:hover {
+    /*color: rgba(0, 162, 232, 0.5);*/
+    color: rgba(0, 122, 204, 0.7);
+}
+
+.nav-sub-container {
+    display: block;
+    text-align: left;
+    padding: 0;
+    font-size: 0.85em;
+}
+
+.nav-sub-container .nav-sub li:not(:last-child)::after  {
+    content: "-";
+}
+
+footer {
+    background-color: rgb(212, 212, 212);
+    padding-top: 1.15em;
+    padding-bottom: 1.5em;
+    padding-right: 8em;
+    padding-left: 8em;
+}
+
+.header {
+    background-color: rgb(212, 212, 212);
+    padding-top: 1.15em;
+    padding-bottom: 1.5em;
+    border-top: 2px black;
+    border-bottom: 2px black;
+    border-top-style: solid;
+    border-bottom-style: inset;
+    padding-right: 8em;
+    padding-left: 8em;
+}

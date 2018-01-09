@@ -182,6 +182,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\common.css" />
+    <Content Include="Content\css\header_footer.css" />
+    <Content Include="Content\Images\brand-logo.png" />
+    <Content Include="Content\Images\car1.png" />
+    <Content Include="Content\Images\car2.png" />
+    <Content Include="Content\Images\car3.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -234,6 +240,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Site.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
