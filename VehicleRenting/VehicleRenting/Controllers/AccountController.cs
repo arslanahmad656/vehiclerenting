@@ -79,7 +79,19 @@ namespace VehicleRenting.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    var userID = SignInManager.AuthenticationManager.AuthenticationResponseGrant.Identity.GetUserId();
+                    if(UserManager.IsInRole(userID, "admin"))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    else if(UserManager.IsInRole(userID, "driver"))
+                    {
+                        return RedirectToAction("Index", "Driver");
+                    }
+                    else
+                    {
+                        throw new Exception("No applicable role found for the logged in user");
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
