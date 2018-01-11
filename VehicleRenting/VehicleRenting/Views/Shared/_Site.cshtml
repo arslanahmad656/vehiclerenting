@@ -24,7 +24,7 @@
                 <nav class="nav-main">
                     <ul>
                         <li>
-                            <a href="#" class="active">Home</a>
+                            <a href="@Url.Action("Index", "Home")" class="active">Home</a>
                         </li>
                         <li>
                             <a href="#">About Us</a>
@@ -34,6 +34,9 @@
                         </li>
                         <li>
                             <a href="#">Book Online</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Login", "Account")">Members Area</a>
                         </li>
                     </ul>
                 </nav>

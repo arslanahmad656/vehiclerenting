@@ -17,7 +17,7 @@
     border-right: 1px solid #000;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    margin-right: 3em;
+    margin-right: 1em;
 }
 
 .nav-main ul li:last-child {
@@ -75,6 +75,6 @@ footer {
     border-bottom: 2px black;
     border-top-style: solid;
     border-bottom-style: inset;
-    padding-right: 8em;
+    padding-right: 0em;
     padding-left: 8em;
 }

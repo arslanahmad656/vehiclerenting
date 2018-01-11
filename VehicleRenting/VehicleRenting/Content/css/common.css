@@ -1,6 +1,6 @@
 ﻿body {
     line-height: 1.5em;
-    word-spacing: 0.20em;
+    word-spacing: 0em;
     letter-spacing: 0.10em;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 17px;
@@ -20,6 +20,10 @@ a {
 
 .text-right {
     text-align: right;
+}
+
+.text-center {
+    text-align: center;
 }
 
 .inline-block{

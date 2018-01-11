@@ -10,7 +10,7 @@
         width: 50%;
     }
 
-    .form-primary input {
+    .form-primary input:not([type="checkbox"]) {
         display: block;
         padding: 0.75em;
         width: 75%;
@@ -22,7 +22,7 @@
         transition: border-color 0.5s;
     }
 
-    .form-primary [type=submit] {
+    .form-primary input[type=submit] {
         font-family: Calibri, sans-serif;
         background-color: rgb(35, 97, 136);
         color: white;
@@ -31,12 +31,54 @@
         transition: background-color 0.5s;
     }
 
+    .form-primary input[type=checkbox]{
+        display: inline;
+        margin: 0.75em;
+    }
+
+    .form-primary label {
+        display: inline;
+    }
+
     .form-primary input::placeholder {
-        color: black;
+        color: rgba(0, 0, 0, 0.5);
         opacity: 1;
     }
 
-    input[type=submit]:hover {
+    .form-primary input[type=submit]:hover {
         cursor: pointer;
         background-color: rgb(17, 48, 68);
+    }
+
+    .form-primary div.checkbox {
+        display: inline;
+    }
+
+    .form-primary .horizontal {
+        padding-left: 3em;
+    }
+
+    .form-primary .horizontal > * {
+        display: inline-block;
+    }
+
+    .form-primary .horizontal .form-left {
+        text-align: left;
+    }
+
+    .form-primary .horizontal .form-right {
+        text-align: right;
+    }
+
+    .form-primary .horizontal .form-center {
+        display: block;
+        text-align: center;
+    }
+
+    .form-primary a {
+        font-weight: bold;
+    }
+
+    .form-primary a:hover {
+        text-decoration: underline;
     }
