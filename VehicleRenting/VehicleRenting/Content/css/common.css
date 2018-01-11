@@ -30,3 +30,14 @@ a {
     padding-right: 8em;
     padding-left: 8em;
 }
+
+header.title {
+    text-align: center;
+}
+
+header.title h1 {
+    text-transform: uppercase;
+    font-family: Calibri, sans-serif;
+    font-size: 3.25em;
+    font-weight: lighter;
+}

@@ -1,0 +1,42 @@
+﻿form {
+        padding: 1.5em;
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+
+    .form-primary {
+        display: inline-block;
+        border-right: 1.5px solid black;
+        width: 50%;
+    }
+
+    .form-primary input {
+        display: block;
+        padding: 0.75em;
+        width: 75%;
+        margin: auto;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 1.1em;
+        border: 1px solid black;
+        margin-bottom: 0.75em;
+        transition: border-color 0.5s;
+    }
+
+    .form-primary [type=submit] {
+        font-family: Calibri, sans-serif;
+        background-color: rgb(35, 97, 136);
+        color: white;
+        text-transform: uppercase;
+        box-sizing: content-box;
+        transition: background-color 0.5s;
+    }
+
+    .form-primary input::placeholder {
+        color: black;
+        opacity: 1;
+    }
+
+    input[type=submit]:hover {
+        cursor: pointer;
+        background-color: rgb(17, 48, 68);
+    }

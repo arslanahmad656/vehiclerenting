@@ -183,6 +183,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\common.css" />
+    <Content Include="Content\css\form.css" />
     <Content Include="Content\css\header_footer.css" />
     <Content Include="Content\Images\brand-logo.png" />
     <Content Include="Content\Images\car1.png" />
