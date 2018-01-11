@@ -157,4 +157,14 @@ CREATE TABLE [dbo].[Drivers]
     CONSTRAINT [FK_Drivers_Nationality] FOREIGN KEY ([NationalityId]) REFERENCES [Nationalities]([Id])
 );
 
+alter table notices
+add DriverId int not null;
 
+alter table issues
+add DriverId int not null;
+
+alter table notices
+add foreign key (DriverId) references Drivers(Id);
+
+alter table issues
+add foreign key (DriverId) references Drivers(Id);

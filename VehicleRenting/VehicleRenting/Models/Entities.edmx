@@ -1,0 +1,1274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Appointments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="1024" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contracts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleId" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="DocumentPath" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="Notes" Type="varchar" MaxLength="2048" />
+        </EntityType>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Path" Type="nvarchar" MaxLength="512" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Drivers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="SalutationId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="RentDueDate" Type="int" />
+          <Property Name="RentDate" Type="datetime" />
+          <Property Name="ContractFrom" Type="datetime" />
+          <Property Name="ContractTo" Type="datetime" />
+          <Property Name="ContractLength" Type="int" />
+          <Property Name="SourceId" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SecurityDepositAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdvancedRentAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="HoldingDepositAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminFee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ReferenceId" Type="int" />
+          <Property Name="ReferenceDocumentPath" Type="nvarchar" MaxLength="512" />
+          <Property Name="IdentityId" Type="int" />
+          <Property Name="IdentityDocuementPath" Type="nvarchar" MaxLength="512" />
+          <Property Name="NationalityId" Type="int" />
+          <Property Name="SpecialConditions" Type="nvarchar" MaxLength="2048" />
+        </EntityType>
+        <EntityType Name="IdentityTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Issues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IssueTypeId" Type="int" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2048" Nullable="false" />
+          <Property Name="DriverId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IssueTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nationalities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NoticeDate" Type="datetime" Nullable="false" />
+          <Property Name="CheckoutDate" Type="datetime" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="2048" Nullable="false" />
+          <Property Name="DriverId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="proprietor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReferenceTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salutations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SourceTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VehicleConditions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vehicles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegistrationNo" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="VehicleColor" Type="varchar" MaxLength="128" />
+          <Property Name="AvailableToDouble" Type="bit" Nullable="false" />
+          <Property Name="RentPerWeek" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VehicleConditionId" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="AvailableDate" Type="datetime" />
+          <Property Name="UnderOffer" Type="bit" />
+          <Property Name="ProprietorId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Issues__DriverId__5DCAEF64">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
+          <End Role="Issues" Type="Self.Issues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Issues">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notices__DriverI__5CD6CB2B">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
+          <End Role="Notices" Type="Self.Notices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notices">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contracts_Vehicle">
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_Identity">
+          <End Role="IdentityTypes" Type="Self.IdentityTypes" Multiplicity="0..1" />
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IdentityTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="IdentityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_Nationality">
+          <End Role="Nationalities" Type="Self.Nationalities" Multiplicity="0..1" />
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nationalities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="NationalityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_ReferenceType">
+          <End Role="ReferenceTypes" Type="Self.ReferenceTypes" Multiplicity="0..1" />
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReferenceTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="ReferenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_Salutation">
+          <End Role="Salutations" Type="Self.Salutations" Multiplicity="1" />
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salutations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="SalutationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_Source">
+          <End Role="SourceTypes" Type="Self.SourceTypes" Multiplicity="0..1" />
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SourceTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="SourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Issues_IssueType">
+          <End Role="IssueTypes" Type="Self.IssueTypes" Multiplicity="1" />
+          <End Role="Issues" Type="Self.Issues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IssueTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Issues">
+              <PropertyRef Name="IssueTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicles_Proprietor">
+          <End Role="proprietor" Type="Self.proprietor" Multiplicity="1" />
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proprietor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="ProprietorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicles_VehicleCondition">
+          <End Role="VehicleConditions" Type="Self.VehicleConditions" Multiplicity="1" />
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleConditions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="VehicleConditionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Drivers" EntityType="Self.Drivers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IdentityTypes" EntityType="Self.IdentityTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Issues" EntityType="Self.Issues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IssueTypes" EntityType="Self.IssueTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nationalities" EntityType="Self.Nationalities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notices" EntityType="Self.Notices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="proprietor" EntityType="Self.proprietor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReferenceTypes" EntityType="Self.ReferenceTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salutations" EntityType="Self.Salutations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SourceTypes" EntityType="Self.SourceTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleConditions" EntityType="Self.VehicleConditions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehicles" EntityType="Self.Vehicles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Issues__DriverId__5DCAEF64" Association="Self.FK__Issues__DriverId__5DCAEF64">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Issues" EntitySet="Issues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notices__DriverI__5CD6CB2B" Association="Self.FK__Notices__DriverI__5CD6CB2B">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Notices" EntitySet="Notices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contracts_Vehicle" Association="Self.FK_Contracts_Vehicle">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_AspNetUsers" Association="Self.FK_Drivers_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_Identity" Association="Self.FK_Drivers_Identity">
+            <End Role="IdentityTypes" EntitySet="IdentityTypes" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_Nationality" Association="Self.FK_Drivers_Nationality">
+            <End Role="Nationalities" EntitySet="Nationalities" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_ReferenceType" Association="Self.FK_Drivers_ReferenceType">
+            <End Role="ReferenceTypes" EntitySet="ReferenceTypes" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_Salutation" Association="Self.FK_Drivers_Salutation">
+            <End Role="Salutations" EntitySet="Salutations" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_Source" Association="Self.FK_Drivers_Source">
+            <End Role="SourceTypes" EntitySet="SourceTypes" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Issues_IssueType" Association="Self.FK_Issues_IssueType">
+            <End Role="IssueTypes" EntitySet="IssueTypes" />
+            <End Role="Issues" EntitySet="Issues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicles_Proprietor" Association="Self.FK_Vehicles_Proprietor">
+            <End Role="proprietor" EntitySet="proprietor" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicles_VehicleCondition" Association="Self.FK_Vehicles_VehicleCondition">
+            <End Role="VehicleConditions" EntitySet="VehicleConditions" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comments" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK_Drivers_AspNetUsers" FromRole="AspNetUsers" ToRole="Drivers" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="DocumentPath" Type="String" MaxLength="512" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Vehicle" Relationship="Self.FK_Contracts_Vehicle" FromRole="Contracts" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Path" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="SalutationId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RentDueDate" Type="Int32" />
+          <Property Name="RentDate" Type="DateTime" Precision="3" />
+          <Property Name="ContractFrom" Type="DateTime" Precision="3" />
+          <Property Name="ContractTo" Type="DateTime" Precision="3" />
+          <Property Name="ContractLength" Type="Int32" />
+          <Property Name="SourceId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SecurityDepositAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdvancedRentAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="HoldingDepositAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ReferenceId" Type="Int32" />
+          <Property Name="ReferenceDocumentPath" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="IdentityId" Type="Int32" />
+          <Property Name="IdentityDocuementPath" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="NationalityId" Type="Int32" />
+          <Property Name="SpecialConditions" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Drivers_AspNetUsers" FromRole="Drivers" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Issues" Relationship="Self.FK__Issues__DriverId__5DCAEF64" FromRole="Drivers" ToRole="Issues" />
+          <NavigationProperty Name="Notices" Relationship="Self.FK__Notices__DriverI__5CD6CB2B" FromRole="Drivers" ToRole="Notices" />
+          <NavigationProperty Name="IdentityType" Relationship="Self.FK_Drivers_Identity" FromRole="Drivers" ToRole="IdentityTypes" />
+          <NavigationProperty Name="Nationality" Relationship="Self.FK_Drivers_Nationality" FromRole="Drivers" ToRole="Nationalities" />
+          <NavigationProperty Name="ReferenceType" Relationship="Self.FK_Drivers_ReferenceType" FromRole="Drivers" ToRole="ReferenceTypes" />
+          <NavigationProperty Name="Salutation" Relationship="Self.FK_Drivers_Salutation" FromRole="Drivers" ToRole="Salutations" />
+          <NavigationProperty Name="SourceType" Relationship="Self.FK_Drivers_Source" FromRole="Drivers" ToRole="SourceTypes" />
+        </EntityType>
+        <EntityType Name="IdentityType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK_Drivers_Identity" FromRole="IdentityTypes" ToRole="Drivers" />
+        </EntityType>
+        <EntityType Name="Issue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IssueTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DriverId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK__Issues__DriverId__5DCAEF64" FromRole="Issues" ToRole="Drivers" />
+          <NavigationProperty Name="IssueType" Relationship="Self.FK_Issues_IssueType" FromRole="Issues" ToRole="IssueTypes" />
+        </EntityType>
+        <EntityType Name="IssueType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Issues" Relationship="Self.FK_Issues_IssueType" FromRole="IssueTypes" ToRole="Issues" />
+        </EntityType>
+        <EntityType Name="Nationality">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK_Drivers_Nationality" FromRole="Nationalities" ToRole="Drivers" />
+        </EntityType>
+        <EntityType Name="Notice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoticeDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CheckoutDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reason" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DriverId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK__Notices__DriverI__5CD6CB2B" FromRole="Notices" ToRole="Drivers" />
+        </EntityType>
+        <EntityType Name="proprietor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Vehicles" Relationship="Self.FK_Vehicles_Proprietor" FromRole="proprietor" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="ReferenceType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK_Drivers_ReferenceType" FromRole="ReferenceTypes" ToRole="Drivers" />
+        </EntityType>
+        <EntityType Name="Salutation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK_Drivers_Salutation" FromRole="Salutations" ToRole="Drivers" />
+        </EntityType>
+        <EntityType Name="SourceType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK_Drivers_Source" FromRole="SourceTypes" ToRole="Drivers" />
+        </EntityType>
+        <EntityType Name="VehicleCondition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Vehicles" Relationship="Self.FK_Vehicles_VehicleCondition" FromRole="VehicleConditions" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegistrationNo" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VehicleColor" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="AvailableToDouble" Type="Boolean" Nullable="false" />
+          <Property Name="RentPerWeek" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VehicleConditionId" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="AvailableDate" Type="DateTime" Precision="3" />
+          <Property Name="UnderOffer" Type="Boolean" />
+          <Property Name="ProprietorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK_Contracts_Vehicle" FromRole="Vehicles" ToRole="Contracts" />
+          <NavigationProperty Name="proprietor" Relationship="Self.FK_Vehicles_Proprietor" FromRole="Vehicles" ToRole="proprietor" />
+          <NavigationProperty Name="VehicleCondition" Relationship="Self.FK_Vehicles_VehicleCondition" FromRole="Vehicles" ToRole="VehicleConditions" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Drivers" Type="Self.Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contracts_Vehicle">
+          <End Role="Vehicles" Type="Self.Vehicle" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Issues__DriverId__5DCAEF64">
+          <End Role="Drivers" Type="Self.Driver" Multiplicity="1" />
+          <End Role="Issues" Type="Self.Issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Issues">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notices__DriverI__5CD6CB2B">
+          <End Role="Drivers" Type="Self.Driver" Multiplicity="1" />
+          <End Role="Notices" Type="Self.Notice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notices">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_Identity">
+          <End Role="IdentityTypes" Type="Self.IdentityType" Multiplicity="0..1" />
+          <End Role="Drivers" Type="Self.Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IdentityTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="IdentityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_Nationality">
+          <End Role="Nationalities" Type="Self.Nationality" Multiplicity="0..1" />
+          <End Role="Drivers" Type="Self.Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nationalities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="NationalityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_ReferenceType">
+          <End Role="ReferenceTypes" Type="Self.ReferenceType" Multiplicity="0..1" />
+          <End Role="Drivers" Type="Self.Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReferenceTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="ReferenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_Salutation">
+          <End Role="Salutations" Type="Self.Salutation" Multiplicity="1" />
+          <End Role="Drivers" Type="Self.Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salutations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="SalutationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_Source">
+          <End Role="SourceTypes" Type="Self.SourceType" Multiplicity="0..1" />
+          <End Role="Drivers" Type="Self.Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SourceTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="SourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Issues_IssueType">
+          <End Role="IssueTypes" Type="Self.IssueType" Multiplicity="1" />
+          <End Role="Issues" Type="Self.Issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IssueTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Issues">
+              <PropertyRef Name="IssueTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicles_Proprietor">
+          <End Role="proprietor" Type="Self.proprietor" Multiplicity="1" />
+          <End Role="Vehicles" Type="Self.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proprietor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="ProprietorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicles_VehicleCondition">
+          <End Role="VehicleConditions" Type="Self.VehicleCondition" Multiplicity="1" />
+          <End Role="Vehicles" Type="Self.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleConditions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="VehicleConditionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Appointments" EntityType="Self.Appointment" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Contracts" EntityType="Self.Contract" />
+          <EntitySet Name="Documents" EntityType="Self.Document" />
+          <EntitySet Name="Drivers" EntityType="Self.Driver" />
+          <EntitySet Name="IdentityTypes" EntityType="Self.IdentityType" />
+          <EntitySet Name="Issues" EntityType="Self.Issue" />
+          <EntitySet Name="IssueTypes" EntityType="Self.IssueType" />
+          <EntitySet Name="Nationalities" EntityType="Self.Nationality" />
+          <EntitySet Name="Notices" EntityType="Self.Notice" />
+          <EntitySet Name="proprietors" EntityType="Self.proprietor" />
+          <EntitySet Name="ReferenceTypes" EntityType="Self.ReferenceType" />
+          <EntitySet Name="Salutations" EntityType="Self.Salutation" />
+          <EntitySet Name="SourceTypes" EntityType="Self.SourceType" />
+          <EntitySet Name="VehicleConditions" EntityType="Self.VehicleCondition" />
+          <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_AspNetUsers" Association="Self.FK_Drivers_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contracts_Vehicle" Association="Self.FK_Contracts_Vehicle">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Issues__DriverId__5DCAEF64" Association="Self.FK__Issues__DriverId__5DCAEF64">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Issues" EntitySet="Issues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notices__DriverI__5CD6CB2B" Association="Self.FK__Notices__DriverI__5CD6CB2B">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Notices" EntitySet="Notices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_Identity" Association="Self.FK_Drivers_Identity">
+            <End Role="IdentityTypes" EntitySet="IdentityTypes" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_Nationality" Association="Self.FK_Drivers_Nationality">
+            <End Role="Nationalities" EntitySet="Nationalities" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_ReferenceType" Association="Self.FK_Drivers_ReferenceType">
+            <End Role="ReferenceTypes" EntitySet="ReferenceTypes" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_Salutation" Association="Self.FK_Drivers_Salutation">
+            <End Role="Salutations" EntitySet="Salutations" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_Source" Association="Self.FK_Drivers_Source">
+            <End Role="SourceTypes" EntitySet="SourceTypes" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Issues_IssueType" Association="Self.FK_Issues_IssueType">
+            <End Role="IssueTypes" EntitySet="IssueTypes" />
+            <End Role="Issues" EntitySet="Issues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicles_Proprietor" Association="Self.FK_Vehicles_Proprietor">
+            <End Role="proprietor" EntitySet="proprietors" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicles_VehicleCondition" Association="Self.FK_Vehicles_VehicleCondition">
+            <End Role="VehicleConditions" EntitySet="VehicleConditions" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="Model.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Appointments">
+            <EntityTypeMapping TypeName="Model.Appointment">
+              <MappingFragment StoreEntitySet="Appointments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="Model.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="Model.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="Model.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Model.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="Model.Contract">
+              <MappingFragment StoreEntitySet="Contracts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="DocumentPath" ColumnName="DocumentPath" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="Model.Document">
+              <MappingFragment StoreEntitySet="Documents">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="Model.Driver">
+              <MappingFragment StoreEntitySet="Drivers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SalutationId" ColumnName="SalutationId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="RentDueDate" ColumnName="RentDueDate" />
+                <ScalarProperty Name="RentDate" ColumnName="RentDate" />
+                <ScalarProperty Name="ContractFrom" ColumnName="ContractFrom" />
+                <ScalarProperty Name="ContractTo" ColumnName="ContractTo" />
+                <ScalarProperty Name="ContractLength" ColumnName="ContractLength" />
+                <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SecurityDepositAmount" ColumnName="SecurityDepositAmount" />
+                <ScalarProperty Name="AdvancedRentAmount" ColumnName="AdvancedRentAmount" />
+                <ScalarProperty Name="HoldingDepositAmount" ColumnName="HoldingDepositAmount" />
+                <ScalarProperty Name="AdminFee" ColumnName="AdminFee" />
+                <ScalarProperty Name="ReferenceId" ColumnName="ReferenceId" />
+                <ScalarProperty Name="ReferenceDocumentPath" ColumnName="ReferenceDocumentPath" />
+                <ScalarProperty Name="IdentityId" ColumnName="IdentityId" />
+                <ScalarProperty Name="IdentityDocuementPath" ColumnName="IdentityDocuementPath" />
+                <ScalarProperty Name="NationalityId" ColumnName="NationalityId" />
+                <ScalarProperty Name="SpecialConditions" ColumnName="SpecialConditions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IdentityTypes">
+            <EntityTypeMapping TypeName="Model.IdentityType">
+              <MappingFragment StoreEntitySet="IdentityTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Issues">
+            <EntityTypeMapping TypeName="Model.Issue">
+              <MappingFragment StoreEntitySet="Issues">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IssueTypeId" ColumnName="IssueTypeId" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IssueTypes">
+            <EntityTypeMapping TypeName="Model.IssueType">
+              <MappingFragment StoreEntitySet="IssueTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nationalities">
+            <EntityTypeMapping TypeName="Model.Nationality">
+              <MappingFragment StoreEntitySet="Nationalities">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notices">
+            <EntityTypeMapping TypeName="Model.Notice">
+              <MappingFragment StoreEntitySet="Notices">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NoticeDate" ColumnName="NoticeDate" />
+                <ScalarProperty Name="CheckoutDate" ColumnName="CheckoutDate" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="proprietors">
+            <EntityTypeMapping TypeName="Model.proprietor">
+              <MappingFragment StoreEntitySet="proprietor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReferenceTypes">
+            <EntityTypeMapping TypeName="Model.ReferenceType">
+              <MappingFragment StoreEntitySet="ReferenceTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salutations">
+            <EntityTypeMapping TypeName="Model.Salutation">
+              <MappingFragment StoreEntitySet="Salutations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SourceTypes">
+            <EntityTypeMapping TypeName="Model.SourceType">
+              <MappingFragment StoreEntitySet="SourceTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleConditions">
+            <EntityTypeMapping TypeName="Model.VehicleCondition">
+              <MappingFragment StoreEntitySet="VehicleConditions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicles">
+            <EntityTypeMapping TypeName="Model.Vehicle">
+              <MappingFragment StoreEntitySet="Vehicles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+                <ScalarProperty Name="VehicleColor" ColumnName="VehicleColor" />
+                <ScalarProperty Name="AvailableToDouble" ColumnName="AvailableToDouble" />
+                <ScalarProperty Name="RentPerWeek" ColumnName="RentPerWeek" />
+                <ScalarProperty Name="VehicleConditionId" ColumnName="VehicleConditionId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="AvailableDate" ColumnName="AvailableDate" />
+                <ScalarProperty Name="UnderOffer" ColumnName="UnderOffer" />
+                <ScalarProperty Name="ProprietorId" ColumnName="ProprietorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
