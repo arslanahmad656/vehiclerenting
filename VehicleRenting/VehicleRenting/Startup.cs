@@ -28,7 +28,7 @@ namespace VehicleRenting
 
             var adminRole = "admin";
             var driverRole = "driver";
-            var pendingChanges = true;  // set this to false after verifying that the seeding is done
+            var pendingChanges = false;  // set this to false after verifying that the seeding is done
 
             // Creating the admin role
             if (!roleManager.RoleExists(adminRole))
