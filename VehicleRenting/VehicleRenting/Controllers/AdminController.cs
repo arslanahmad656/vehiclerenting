@@ -73,6 +73,7 @@ namespace VehicleRenting.Controllers
             else
             {
                 ModelState.AddModelError("", "Please fill in all the fields properly.");
+                ViewBag.VehicleId = new SelectList(db.Vehicles, "Id", "RegistrationNo", model.VehicleId);
                 return View(model);
             }
         }
@@ -103,6 +104,69 @@ namespace VehicleRenting.Controllers
             db.Entry(contract).State = EntityState.Deleted;
             db.SaveChanges();
             return RedirectToAction("ContractIndex");
+        }
+
+        public ActionResult EditContract(int id)
+        {
+            var model = db.Contracts.Find(id);
+            if(model == null)
+            {
+                return new HttpNotFoundResult("No contract found with the specified id.");
+            }
+            ViewBag.VehicleId = new SelectList(db.Vehicles, "Id", "RegistrationNo", model.VehicleId);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditContract(Contract model)
+        {
+            if(ModelState.IsValid)
+            {
+                var serverPath = Server.MapPath("~/Content/");
+                var fileName = $"contract_{model.Id}";
+                var completePath = Path.Combine(serverPath, fileName);
+                var file = Request.Files[0];
+                fileName = null;
+                serverPath = null;
+                string fullPath = null;
+
+                if (file != null && file.ContentLength > 0)
+                {
+                    if (System.IO.File.Exists(completePath))
+                    {
+                        System.IO.File.Delete(completePath);
+                    }
+
+                    fileName = $"contract_{model.Id}";
+                    serverPath = Server.MapPath("~/Content/");
+                    fullPath = Path.Combine(serverPath, fileName);
+                    file.SaveAs(fullPath);
+
+                    model.DocumentPath = fileName;
+                }
+                else
+                {
+                    if (System.IO.File.Exists(completePath))
+                    {
+                        model.DocumentPath = $"contract_{model.Id}";
+                    }
+                    else
+                    {
+                        model.DocumentPath = "nofile";
+                    }
+                }
+
+
+                db.Entry(model).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ContractIndex");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Please fill in all the fields properly.");
+                ViewBag.VehicleId = new SelectList(db.Vehicles, "Id", "RegistrationNo", model.VehicleId);
+                return View(model);
+            }
         }
 
         public FileResult DownloadContractDocument(string documentName)
