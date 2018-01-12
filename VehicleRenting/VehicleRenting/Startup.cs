@@ -83,148 +83,148 @@ namespace VehicleRenting
             }
 
             // Add the new seeds in this block:
-            if(pendingChanges)
-            {
-                db.Salutations.Add(new Salutation
-                {
-                    Code = 1,
-                    Title = "Mr."
-                });
+            //if(pendingChanges)
+            //{
+            //    db.Salutations.Add(new Salutation
+            //    {
+            //        Code = 1,
+            //        Title = "Mr."
+            //    });
 
-                db.Salutations.Add(new Salutation
-                {
-                    Code = 2,
-                    Title = "Mrs."
-                });
+            //    db.Salutations.Add(new Salutation
+            //    {
+            //        Code = 2,
+            //        Title = "Mrs."
+            //    });
 
-                db.Salutations.Add(new Salutation
-                {
-                    Code = 3,
-                    Title = "Ms."
-                });
+            //    db.Salutations.Add(new Salutation
+            //    {
+            //        Code = 3,
+            //        Title = "Ms."
+            //    });
 
-                db.SaveChanges();
+            //    db.SaveChanges();
 
-                db.Nationalities.Add(new Nationality
-                {
-                    Code = 1,
-                    Title = "United Kingdom"
-                });
+            //    db.Nationalities.Add(new Nationality
+            //    {
+            //        Code = 1,
+            //        Title = "United Kingdom"
+            //    });
 
-                db.Nationalities.Add(new Nationality
-                {
-                    Code = 2,
-                    Title = "United States"
-                });
+            //    db.Nationalities.Add(new Nationality
+            //    {
+            //        Code = 2,
+            //        Title = "United States"
+            //    });
 
-                db.Nationalities.Add(new Nationality
-                {
-                    Code = 3,
-                    Title = "Pakistan"
-                });
+            //    db.Nationalities.Add(new Nationality
+            //    {
+            //        Code = 3,
+            //        Title = "Pakistan"
+            //    });
 
-                db.SaveChanges();
+            //    db.SaveChanges();
 
-                db.VehicleConditions.Add(new VehicleCondition
-                {
-                    Code = 1,
-                    Title = "Excellent"
-                });
+            //    db.VehicleConditions.Add(new VehicleCondition
+            //    {
+            //        Code = 1,
+            //        Title = "Excellent"
+            //    });
 
-                db.VehicleConditions.Add(new VehicleCondition
-                {
-                    Code = 2,
-                    Title = "Good"
-                });
+            //    db.VehicleConditions.Add(new VehicleCondition
+            //    {
+            //        Code = 2,
+            //        Title = "Good"
+            //    });
 
-                db.VehicleConditions.Add(new VehicleCondition
-                {
-                    Code = 3,
-                    Title = "Acceptable"
-                });
+            //    db.VehicleConditions.Add(new VehicleCondition
+            //    {
+            //        Code = 3,
+            //        Title = "Acceptable"
+            //    });
 
-                db.VehicleConditions.Add(new VehicleCondition
-                {
-                    Code = 4,
-                    Title = "Not acceptable"
-                });
+            //    db.VehicleConditions.Add(new VehicleCondition
+            //    {
+            //        Code = 4,
+            //        Title = "Not acceptable"
+            //    });
 
-                db.SaveChanges();
+            //    db.SaveChanges();
 
-                db.IssueTypes.Add(new IssueType
-                {
-                    Code = 1,
-                    Title = "Complaint"
-                });
+            //    db.IssueTypes.Add(new IssueType
+            //    {
+            //        Code = 1,
+            //        Title = "Complaint"
+            //    });
 
-                db.IssueTypes.Add(new IssueType
-                {
-                    Code = 2,
-                    Title = "Question"
-                });
+            //    db.IssueTypes.Add(new IssueType
+            //    {
+            //        Code = 2,
+            //        Title = "Question"
+            //    });
 
-                db.IssueTypes.Add(new IssueType
-                {
-                    Code = 3,
-                    Title = "Other"
-                });
+            //    db.IssueTypes.Add(new IssueType
+            //    {
+            //        Code = 3,
+            //        Title = "Other"
+            //    });
 
-                db.SaveChanges();
+            //    db.SaveChanges();
 
-                db.SourceTypes.Add(new SourceType
-                {
-                    Code = 1,
-                    Title = "Website"
-                });
+            //    db.SourceTypes.Add(new SourceType
+            //    {
+            //        Code = 1,
+            //        Title = "Website"
+            //    });
 
-                db.SourceTypes.Add(new SourceType
-                {
-                    Code = 2,
-                    Title = "Walk-In"
-                });
+            //    db.SourceTypes.Add(new SourceType
+            //    {
+            //        Code = 2,
+            //        Title = "Walk-In"
+            //    });
 
-                db.SourceTypes.Add(new SourceType
-                {
-                    Code = 3,
-                    Title = "Other"
-                });
+            //    db.SourceTypes.Add(new SourceType
+            //    {
+            //        Code = 3,
+            //        Title = "Other"
+            //    });
 
-                db.SaveChanges();
+            //    db.SaveChanges();
 
-                db.IdentityTypes.Add(new IdentityType
-                {
-                    Code = 1,
-                    Title = "Passport"
-                });
+            //    db.IdentityTypes.Add(new IdentityType
+            //    {
+            //        Code = 1,
+            //        Title = "Passport"
+            //    });
 
-                db.IdentityTypes.Add(new IdentityType
-                {
-                    Code = 2,
-                    Title = "Driving Liscence"
-                });
+            //    db.IdentityTypes.Add(new IdentityType
+            //    {
+            //        Code = 2,
+            //        Title = "Driving Liscence"
+            //    });
 
-                db.IdentityTypes.Add(new IdentityType
-                {
-                    Code = 3,
-                    Title = "Other"
-                });
+            //    db.IdentityTypes.Add(new IdentityType
+            //    {
+            //        Code = 3,
+            //        Title = "Other"
+            //    });
 
-                db.SaveChanges();
+            //    db.SaveChanges();
 
-                db.ReferenceTypes.Add(new ReferenceType
-                {
-                    Code = 1,
-                    Title = "Character"
-                });
+            //    db.ReferenceTypes.Add(new ReferenceType
+            //    {
+            //        Code = 1,
+            //        Title = "Character"
+            //    });
 
-                db.ReferenceTypes.Add(new ReferenceType
-                {
-                    Code = 2,
-                    Title = "Other"
-                });
+            //    db.ReferenceTypes.Add(new ReferenceType
+            //    {
+            //        Code = 2,
+            //        Title = "Other"
+            //    });
 
-                db.SaveChanges();
-            }
+            //    db.SaveChanges();
+            //}
         }
     }
 }
