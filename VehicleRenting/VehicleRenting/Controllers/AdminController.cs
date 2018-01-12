@@ -113,5 +113,17 @@ namespace VehicleRenting.Controllers
         }
 
         #endregion
+
+        #region others
+
+        public ActionResult GetAllFiles()
+        {
+            var serverPath = Server.MapPath("~/Content/");
+            var files = Directory.GetFiles(serverPath);
+            ViewBag.Files = files;
+            return View();
+        }
+
+        #endregion
     }
 }

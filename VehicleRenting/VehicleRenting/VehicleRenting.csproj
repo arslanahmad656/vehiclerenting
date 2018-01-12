@@ -345,6 +345,7 @@
     <Content Include="Views\Admin\ContractIndex.cshtml" />
     <Content Include="Views\Admin\CreateContract.cshtml" />
     <Content Include="Views\Admin\ContractDetails.cshtml" />
+    <Content Include="Views\Admin\GetAllFiles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
