@@ -40,16 +40,17 @@ namespace VehicleRenting.Controllers
             if(ModelState.IsValid)
             {
                 var file = Request.Files[0];
-                string imageName = null;
+                string fileName = null;
                 string serverPath = null;
                 string fullPath = null;
                 string newPath = null;
 
                 if (file != null && file.ContentLength > 0)
                 {
-                    imageName = Path.GetFileName(file.FileName);
-                    serverPath = Server.MapPath("~/Content/Files/Contracts");
-                    fullPath = Path.Combine(serverPath, imageName);
+                    //fileName = Path.GetFileName(file.FileName);
+                    fileName = new Guid().ToString();
+                    serverPath = Server.MapPath("~/Content/");
+                    fullPath = Path.Combine(serverPath, fileName);
                     file.SaveAs(fullPath);
                 }
 
@@ -60,7 +61,7 @@ namespace VehicleRenting.Controllers
 
                 if (file != null && file.ContentLength > 0)
                 {
-                    newPath = Path.Combine(serverPath, $"{model.Id}{Path.GetExtension(fullPath)}");
+                    newPath = Path.Combine(serverPath, $"contract_{model.Id}{Path.GetExtension(fullPath)}");
                     System.IO.File.Move(fullPath, newPath);
                     model.DocumentPath = Path.GetFileName(newPath);
                     db.Entry(model).State = EntityState.Modified;
@@ -95,7 +96,7 @@ namespace VehicleRenting.Controllers
             }
             if(!string.IsNullOrWhiteSpace(contract.DocumentPath))
             {
-                var serverPath = Server.MapPath("~/Content/Files/Contracts/");
+                var serverPath = Server.MapPath("~/Content/");
                 var fullPath = Path.Combine(serverPath, contract.DocumentPath);
                 System.IO.File.Delete(fullPath);
             }
@@ -106,7 +107,7 @@ namespace VehicleRenting.Controllers
 
         public FileResult DownloadContractDocument(string documentName)
         {
-            var serverPath = Server.MapPath("~/Content/Files/Contracts/");
+            var serverPath = Server.MapPath("~/Content/");
             var fullPath = Path.Combine(serverPath, documentName);
             return File(fullPath, System.Net.Mime.MediaTypeNames.Application.Octet, "Contract");
         }
