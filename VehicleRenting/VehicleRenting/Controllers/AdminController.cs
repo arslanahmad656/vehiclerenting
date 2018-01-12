@@ -109,7 +109,7 @@ namespace VehicleRenting.Controllers
         {
             var serverPath = Server.MapPath("~/Content/");
             var fullPath = Path.Combine(serverPath, documentName);
-            return File(fullPath, System.Net.Mime.MediaTypeNames.Application.Octet, "Contract");
+            return File(fullPath, System.Net.Mime.MediaTypeNames.Application.Octet, documentName);
         }
 
         #endregion
