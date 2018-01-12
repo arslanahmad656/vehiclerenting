@@ -48,7 +48,7 @@ namespace VehicleRenting.Controllers
                 if (file != null && file.ContentLength > 0)
                 {
                     imageName = Path.GetFileName(file.FileName);
-                    serverPath = Server.MapPath("~/App_Data/Files/Contracts");
+                    serverPath = Server.MapPath("~/Content/Files/Contracts");
                     fullPath = Path.Combine(serverPath, imageName);
                     file.SaveAs(fullPath);
                 }
@@ -95,7 +95,7 @@ namespace VehicleRenting.Controllers
             }
             if(!string.IsNullOrWhiteSpace(contract.DocumentPath))
             {
-                var serverPath = Server.MapPath("~/App_Data/Files/Contracts/");
+                var serverPath = Server.MapPath("~/Content/Files/Contracts/");
                 var fullPath = Path.Combine(serverPath, contract.DocumentPath);
                 System.IO.File.Delete(fullPath);
             }
@@ -106,7 +106,7 @@ namespace VehicleRenting.Controllers
 
         public FileResult DownloadContractDocument(string documentName)
         {
-            var serverPath = Server.MapPath("~/App_Data/Files/Contracts/");
+            var serverPath = Server.MapPath("~/Content/Files/Contracts/");
             var fullPath = Path.Combine(serverPath, documentName);
             return File(fullPath, System.Net.Mime.MediaTypeNames.Application.Octet, "Contract");
         }
