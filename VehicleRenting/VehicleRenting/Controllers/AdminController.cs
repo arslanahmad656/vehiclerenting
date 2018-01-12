@@ -257,6 +257,94 @@ namespace VehicleRenting.Controllers
 
         #endregion
 
+        #region Vehicles
+
+        public ActionResult VehicleIndex()
+        {
+            return View(db.Vehicles.AsEnumerable());
+        }
+
+        public ActionResult CreateVehicle()
+        {
+            ViewBag.ProprietorId = new SelectList(db.proprietors, "Id", "Name");
+            ViewBag.VehicleConditionId = new SelectList(db.VehicleConditions, "Id", "Title");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateVehicle(Vehicle model)
+        {
+            if(ModelState.IsValid)
+            {
+                db.Vehicles.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.ProprietorId = new SelectList(db.proprietors, "Id", "Name", model.ProprietorId);
+                ViewBag.VehicleConditionId = new SelectList(db.VehicleConditions, "Id", "Title", model.VehicleConditionId);
+                ModelState.AddModelError("", "Please fill in all the fields properly.");
+                return View(model);
+            }
+        }
+
+        public ActionResult EditVehicle(int id)
+        {
+            var model = db.Vehicles.Find(id);
+            if(model == null)
+            {
+                return new HttpNotFoundResult("No vehicle found with the specified ID.");
+            }
+            ViewBag.ProprietorId = new SelectList(db.proprietors, "Id", "Name", model.ProprietorId);
+            ViewBag.VehicleConditionId = new SelectList(db.VehicleConditions, "Id", "Title", model.VehicleConditionId);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditVehicle(Vehicle model)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(model).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("VehicleIndex");
+            }
+            else
+            {
+                ViewBag.ProprietorId = new SelectList(db.proprietors, "Id", "Name", model.ProprietorId);
+                ViewBag.VehicleConditionId = new SelectList(db.VehicleConditions, "Id", "Title", model.VehicleConditionId);
+                ModelState.AddModelError("", "Please fill in all the fields properly.");
+                return View(model);
+            }
+        }
+
+        public ActionResult VehicleDetails(int id)
+        {
+            var model = db.Vehicles.Find(id);
+            if (model == null)
+            {
+                return new HttpNotFoundResult("No vehicle found with the specified ID.");
+            }
+            ViewBag.ProprietorId = new SelectList(db.proprietors, "Id", "Name", model.ProprietorId);
+            ViewBag.VehicleConditionId = new SelectList(db.VehicleConditions, "Id", "Title", model.VehicleConditionId);
+            return View(model);
+        }
+
+        public ActionResult DeleteVehicle(int id)
+        {
+            var model = db.Vehicles.Find(id);
+            if (model == null)
+            {
+                return new HttpNotFoundResult("No vehicle found with the specified ID.");
+            }
+            db.Entry(model).State = EntityState.Deleted;
+            db.SaveChanges();
+            return RedirectToAction("VehicleIndex");
+        }
+
+        #endregion
+
         #region others
 
         public ActionResult GetAllFiles()

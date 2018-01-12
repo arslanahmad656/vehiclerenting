@@ -1,0 +1,91 @@
+﻿@model VehicleRenting.Models.Vehicle
+
+@{
+    ViewBag.Title = "VehicleDetails";
+}
+
+<header class="title text-left">
+    <h1>Vehicle Details</h1>
+    <hr />
+</header>
+
+<div>
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleColor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvailableToDouble)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvailableToDouble)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RentPerWeek)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RentPerWeek)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvailableDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvailableDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnderOffer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnderOffer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proprietor.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proprietor.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleCondition.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleCondition.Title)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

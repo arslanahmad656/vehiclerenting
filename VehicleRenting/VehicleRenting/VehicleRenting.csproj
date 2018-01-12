@@ -351,6 +351,10 @@
     <Content Include="Views\Admin\ProprietorIndex.cshtml" />
     <Content Include="Views\Admin\EditProprietor.cshtml" />
     <Content Include="Views\Admin\ProprietorDetails.cshtml" />
+    <Content Include="Views\Admin\CreateVehicle.cshtml" />
+    <Content Include="Views\Admin\VehicleIndex.cshtml" />
+    <Content Include="Views\Admin\EditVehicle.cshtml" />
+    <Content Include="Views\Admin\VehicleDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
