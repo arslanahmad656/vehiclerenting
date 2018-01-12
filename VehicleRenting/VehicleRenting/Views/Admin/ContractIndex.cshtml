@@ -1,0 +1,63 @@
+﻿@model IEnumerable<VehicleRenting.Models.Contract>
+
+@{
+    ViewBag.Title = "ContractIndex";
+}
+
+<style>
+    
+</style>
+
+<header class="title">
+    <h1>Contracts List</h1>
+</header>
+
+<p>
+    @Html.ActionLink("Create New", "CreateContract")
+</p>
+
+@if(Model.Count() == 0)
+{
+    <h3 title="Create new contract by clicking 'Create New'" class="text-danger">Sorry! There are currently no contracts available.</h3>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vehicle.RegistrationNo)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vehicle.RegistrationNo)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditContract", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "ContractDetails", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "DeleteContract", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}

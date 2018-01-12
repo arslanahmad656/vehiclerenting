@@ -82,7 +82,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="VehicleId" Type="int" Nullable="false" />
+          <Property Name="VehicleId" Type="int" />
           <Property Name="StartDate" Type="datetime" Nullable="false" />
           <Property Name="EndDate" Type="datetime" />
           <Property Name="DocumentPath" Type="varchar" MaxLength="512" Nullable="false" />
@@ -246,7 +246,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contracts_Vehicle">
-          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="1" />
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="0..1" />
           <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Vehicles">
@@ -589,7 +589,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VehicleId" Type="Int32" Nullable="false" />
+          <Property Name="VehicleId" Type="Int32" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="DocumentPath" Type="String" MaxLength="512" FixedLength="false" Unicode="false" Nullable="false" />
@@ -792,7 +792,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contracts_Vehicle">
-          <End Role="Vehicles" Type="Self.Vehicle" Multiplicity="1" />
+          <End Role="Vehicles" Type="Self.Vehicle" Multiplicity="0..1" />
           <End Role="Contracts" Type="Self.Contract" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Vehicles">

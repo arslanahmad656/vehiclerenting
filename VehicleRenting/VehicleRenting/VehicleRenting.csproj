@@ -261,9 +261,11 @@
     <Content Include="App_Data\Vehicle Renting tables.sql" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\button.css" />
     <Content Include="Content\css\common.css" />
     <Content Include="Content\css\form.css" />
     <Content Include="Content\css\header_footer.css" />
+    <Content Include="Content\css\Table.css" />
     <Content Include="Content\Images\brand-logo.png" />
     <Content Include="Content\Images\car1.png" />
     <Content Include="Content\Images\car2.png" />
@@ -339,6 +341,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Site.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\ContractIndex.cshtml" />
+    <Content Include="Views\Admin\CreateContract.cshtml" />
+    <Content Include="Views\Admin\ContractDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -351,7 +356,9 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\Files\Contracts\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

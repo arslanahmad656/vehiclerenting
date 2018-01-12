@@ -82,3 +82,45 @@
     .form-primary a:hover {
         text-decoration: underline;
     }
+
+    .form-horizontal input:not([type="checkbox"]),
+        .form-horizontal select,
+        .form-horizontal textarea {
+        display: block;
+        padding: 0.75em;
+        margin-bottom: 0.66em;
+    }
+
+    .form-horizontal input:not([type="checkbox"]),
+        .form-horizontal textarea {
+        width: 80%;
+    }
+
+    .form-horizontal input[type=submit], 
+        .form-horizontal input[type=reset] {
+        display: inline-block;
+        width: auto;
+        padding-left: 1em;
+        padding-right: 1em;
+        text-transform: uppercase;
+    }
+
+    .form-horizontal select {
+        width: 83.5%;
+    }
+
+    .form-horizontal div.form-group {
+        display: block;
+        width: 100%;
+    }
+
+    .form-horizontal div.label-box {
+        display: inline-block;
+        width: 35%;
+        text-align: right;
+    }
+
+    .form-horizontal div.input-box {
+        display: inline-block;
+        width: 55%;
+    }

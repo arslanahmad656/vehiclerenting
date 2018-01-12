@@ -15,7 +15,7 @@ namespace VehicleRenting.Models
     public partial class Contract
     {
         public int Id { get; set; }
-        public int VehicleId { get; set; }
+        public Nullable<int> VehicleId { get; set; }
         public System.DateTime StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public string DocumentPath { get; set; }

@@ -8,6 +8,11 @@
     padding: 0;
 }
 
+hr{
+    border-style: none;
+    border-bottom-style: solid;
+}
+
 div, header, footer, section, article, nav {
     padding: 0;
     margin: 0;
@@ -16,6 +21,11 @@ div, header, footer, section, article, nav {
 a {
     text-decoration: none;
     color: black;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 .text-right {
@@ -24,6 +34,10 @@ a {
 
 .text-center {
     text-align: center;
+}
+
+.text-left {
+    text-align: left;
 }
 
 .inline-block{
@@ -39,9 +53,17 @@ header.title {
     text-align: center;
 }
 
+header.title.text-left {
+    text-align: left;
+}
+
 header.title h1 {
     text-transform: uppercase;
     font-family: Calibri, sans-serif;
     font-size: 3.25em;
     font-weight: lighter;
+}
+
+.text-danger {
+    color: rgba(255, 0, 0, 0.5);
 }

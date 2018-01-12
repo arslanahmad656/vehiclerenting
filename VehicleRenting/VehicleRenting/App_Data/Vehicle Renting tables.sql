@@ -168,3 +168,6 @@ add foreign key (DriverId) references Drivers(Id);
 
 alter table issues
 add foreign key (DriverId) references Drivers(Id);
+
+alter table contracts
+ alter column vehicleId int null;

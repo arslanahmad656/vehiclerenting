@@ -1,0 +1,70 @@
+﻿@model VehicleRenting.Models.Contract
+
+@{
+    ViewBag.Title = "ContractDetails";
+}
+
+<header class="title text-left">
+    <h1>Contract Details</h1>
+    <hr />
+</header>
+
+<style>
+    dd {
+        margin: 0;
+        margin-bottom: 2em;
+    }
+
+    dt {
+        font-weight: bold;
+    }
+</style>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocumentPath)
+        </dt>
+
+        <dd>
+            @Html.ActionLink("Download Document", "DownloadContractDocument", new { documentName = Model.DocumentPath })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.RegistrationNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.RegistrationNo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
