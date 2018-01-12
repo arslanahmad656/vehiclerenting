@@ -67,3 +67,12 @@ header.title h1 {
 .text-danger {
     color: rgba(255, 0, 0, 0.5);
 }
+
+dd {
+    margin: 0;
+    margin-bottom: 2em;
+}
+
+dt {
+    font-weight: bold;
+}

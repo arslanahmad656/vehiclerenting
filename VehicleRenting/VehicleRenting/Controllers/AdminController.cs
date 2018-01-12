@@ -178,6 +178,85 @@ namespace VehicleRenting.Controllers
 
         #endregion
 
+
+        #region Proprietor
+
+        public ActionResult ProprietorIndex()
+        {
+            return View(db.proprietors.ToList());
+        }
+
+        public ActionResult CreateProprietor()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateProprietor(proprietor model)
+        {
+            if(ModelState.IsValid)
+            {
+                db.proprietors.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Plaease fill in all the fields properly.");
+                return View(model);
+            }
+        }
+
+        public ActionResult EditProprietor(int id)
+        {
+            var model = db.proprietors.Find(id);
+            if(model == null)
+            {
+                return new HttpNotFoundResult("No proprietor found with the specified ID.");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditProprietor(proprietor model)
+        {
+            if(ModelState.IsValid)
+            {
+                db.Entry(model).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ProprietorIndex");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Please fill in all the fields properly.");
+                return View(model);
+            }
+        }
+
+        public ActionResult ProprietorDetails(int id)
+        {
+            var model = db.proprietors.Find(id);
+            if (model == null)
+            {
+                return new HttpNotFoundResult("No proprietor found with the specified ID.");
+            }
+            return View(model);
+        }
+
+        public ActionResult DeleteProprietor(int id)
+        {
+            var model = db.proprietors.Find(id);
+            if (model == null)
+            {
+                return new HttpNotFoundResult("No proprietor found with the specified ID.");
+            }
+            db.Entry(model).State = EntityState.Deleted;
+            db.SaveChanges();
+            return RedirectToAction("ProprietorIndex");
+        }
+
+        #endregion
+
         #region others
 
         public ActionResult GetAllFiles()

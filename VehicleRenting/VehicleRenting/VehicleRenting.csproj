@@ -347,6 +347,10 @@
     <Content Include="Views\Admin\ContractDetails.cshtml" />
     <Content Include="Views\Admin\GetAllFiles.cshtml" />
     <Content Include="Views\Admin\EditContract.cshtml" />
+    <Content Include="Views\Admin\CreateProprietor.cshtml" />
+    <Content Include="Views\Admin\ProprietorIndex.cshtml" />
+    <Content Include="Views\Admin\EditProprietor.cshtml" />
+    <Content Include="Views\Admin\ProprietorDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
