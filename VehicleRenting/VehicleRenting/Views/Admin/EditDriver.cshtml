@@ -1,0 +1,278 @@
+﻿@model VehicleRenting.Models.Driver
+
+@{
+    ViewBag.Title = "EditDriver";
+}
+
+<header class="title text-left">
+    <h1>Update driver information</h1>
+    <hr />
+</header>
+
+
+@using (Html.BeginForm("EditDriver", "Admin", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    @Html.HiddenFor(model => model.Id)
+    <br />
+    @Html.HiddenFor(model => model.UserId)
+    <br />
+    @Html.Hidden("reference_old", Model.ReferenceDocumentPath)
+    <br />
+    @Html.Hidden("identity_old", Model.IdentityDocuementPath)
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div>
+        <p>
+            @Html.ValidationMessageFor(model => model.SalutationId, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.RentDueDate, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.RentDate, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.ContractFrom, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.ContractTo, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.ContractLength, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.SourceId, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.SecurityDepositAmount, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.AdminFee, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.AdvancedRentAmount, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.HoldingDepositAmount, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.ReferenceId, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.ReferenceDocumentPath, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.IdentityId, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.IdentityDocuementPath, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.NationalityId, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.SpecialConditions, "", new { @class = "text-danger" })
+        </p>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.SalutationId, "SalutationId", htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.DropDownList("SalutationId", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.RentDueDate, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.EditorFor(model => model.RentDueDate, new { htmlAttributes = new { @class = "" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.RentDate, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.EditorFor(model => model.RentDate, new { htmlAttributes = new { @class = "" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.ContractFrom, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.EditorFor(model => model.ContractFrom, new { htmlAttributes = new { @class = "" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.ContractTo, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.EditorFor(model => model.ContractTo, new { htmlAttributes = new { @class = "" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.ContractLength, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.EditorFor(model => model.ContractLength, new { htmlAttributes = new { @class = "" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.SourceId, "SourceId", htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.DropDownList("SourceId", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.SecurityDepositAmount, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.EditorFor(model => model.SecurityDepositAmount, new { htmlAttributes = new { @class = "" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.AdvancedRentAmount, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.EditorFor(model => model.AdvancedRentAmount, new { htmlAttributes = new { @class = "" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.HoldingDepositAmount, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.EditorFor(model => model.HoldingDepositAmount, new { htmlAttributes = new { @class = "" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.AdminFee, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.EditorFor(model => model.AdminFee, new { htmlAttributes = new { @class = "" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.ReferenceId, "ReferenceId", htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.DropDownList("ReferenceId", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.ReferenceDocumentPath, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @*     <input type="file" name="@Model.ReferenceDocumentPath" id="@Model.ReferenceDocumentPath" />*@
+            @Html.EditorFor(model => model.ReferenceDocumentPath, new { htmlAttributes = new { @class = "", type = "file" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.IdentityId, "IdentityId", htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.DropDownList("IdentityId", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.IdentityDocuementPath, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @*<input type="file" name="@Model.IdentityDocuementPath" id="@Model.IdentityDocuementPath" />*@
+            @Html.EditorFor(model => model.IdentityDocuementPath, new { htmlAttributes = new { @class = "", type = "file" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.NationalityId, "NationalityId", htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.DropDownList("NationalityId", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box" style="vertical-align: top;">
+            @Html.LabelFor(model => model.SpecialConditions, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.TextAreaFor(model => model.SpecialConditions, new { @class = "", rows = 7 } )
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            &nbsp;
+        </div>
+        <div class="input-box">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="reset" value="Reset" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

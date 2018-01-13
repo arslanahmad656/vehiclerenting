@@ -165,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\ApplicationWideConstants.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -357,6 +358,10 @@
     <Content Include="Views\Admin\VehicleIndex.cshtml" />
     <Content Include="Views\Admin\EditVehicle.cshtml" />
     <Content Include="Views\Admin\VehicleDetails.cshtml" />
+    <Content Include="Views\Admin\CreateDriver.cshtml" />
+    <Content Include="Views\Admin\DriverIndex.cshtml" />
+    <Content Include="Views\Admin\DriverDetails.cshtml" />
+    <Content Include="Views\Admin\EditDriver.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

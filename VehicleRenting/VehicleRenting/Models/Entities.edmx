@@ -101,7 +101,6 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="SalutationId" Type="int" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="128" Nullable="false" />
@@ -122,6 +121,7 @@
           <Property Name="IdentityDocuementPath" Type="nvarchar" MaxLength="512" />
           <Property Name="NationalityId" Type="int" />
           <Property Name="SpecialConditions" Type="nvarchar" MaxLength="2048" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="IdentityTypes">
           <Key>
@@ -221,7 +221,7 @@
           <Property Name="UnderOffer" Type="bit" />
           <Property Name="ProprietorId" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Issues__DriverId__5DCAEF64">
+        <Association Name="FK__Issues__DriverId__6383C8BA">
           <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
           <End Role="Issues" Type="Self.Issues" Multiplicity="*" />
           <ReferentialConstraint>
@@ -233,7 +233,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Notices__DriverI__5CD6CB2B">
+        <Association Name="FK__Notices__DriverI__628FA481">
           <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
           <End Role="Notices" Type="Self.Notices" Multiplicity="*" />
           <ReferentialConstraint>
@@ -443,11 +443,11 @@
           <EntitySet Name="SourceTypes" EntityType="Self.SourceTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VehicleConditions" EntityType="Self.VehicleConditions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehicles" EntityType="Self.Vehicles" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Issues__DriverId__5DCAEF64" Association="Self.FK__Issues__DriverId__5DCAEF64">
+          <AssociationSet Name="FK__Issues__DriverId__6383C8BA" Association="Self.FK__Issues__DriverId__6383C8BA">
             <End Role="Drivers" EntitySet="Drivers" />
             <End Role="Issues" EntitySet="Issues" />
           </AssociationSet>
-          <AssociationSet Name="FK__Notices__DriverI__5CD6CB2B" Association="Self.FK__Notices__DriverI__5CD6CB2B">
+          <AssociationSet Name="FK__Notices__DriverI__628FA481" Association="Self.FK__Notices__DriverI__628FA481">
             <End Role="Drivers" EntitySet="Drivers" />
             <End Role="Notices" EntitySet="Notices" />
           </AssociationSet>
@@ -609,7 +609,6 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="SalutationId" Type="Int32" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
@@ -630,9 +629,10 @@
           <Property Name="IdentityDocuementPath" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="NationalityId" Type="Int32" />
           <Property Name="SpecialConditions" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Drivers_AspNetUsers" FromRole="Drivers" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Issues" Relationship="Self.FK__Issues__DriverId__5DCAEF64" FromRole="Drivers" ToRole="Issues" />
-          <NavigationProperty Name="Notices" Relationship="Self.FK__Notices__DriverI__5CD6CB2B" FromRole="Drivers" ToRole="Notices" />
+          <NavigationProperty Name="Issues" Relationship="Self.FK__Issues__DriverId__6383C8BA" FromRole="Drivers" ToRole="Issues" />
+          <NavigationProperty Name="Notices" Relationship="Self.FK__Notices__DriverI__628FA481" FromRole="Drivers" ToRole="Notices" />
           <NavigationProperty Name="IdentityType" Relationship="Self.FK_Drivers_Identity" FromRole="Drivers" ToRole="IdentityTypes" />
           <NavigationProperty Name="Nationality" Relationship="Self.FK_Drivers_Nationality" FromRole="Drivers" ToRole="Nationalities" />
           <NavigationProperty Name="ReferenceType" Relationship="Self.FK_Drivers_ReferenceType" FromRole="Drivers" ToRole="ReferenceTypes" />
@@ -657,7 +657,7 @@
           <Property Name="Subject" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DriverId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Driver" Relationship="Self.FK__Issues__DriverId__5DCAEF64" FromRole="Issues" ToRole="Drivers" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK__Issues__DriverId__6383C8BA" FromRole="Issues" ToRole="Drivers" />
           <NavigationProperty Name="IssueType" Relationship="Self.FK_Issues_IssueType" FromRole="Issues" ToRole="IssueTypes" />
         </EntityType>
         <EntityType Name="IssueType">
@@ -687,7 +687,7 @@
           <Property Name="CheckoutDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Reason" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DriverId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Driver" Relationship="Self.FK__Notices__DriverI__5CD6CB2B" FromRole="Notices" ToRole="Drivers" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK__Notices__DriverI__628FA481" FromRole="Notices" ToRole="Drivers" />
         </EntityType>
         <EntityType Name="proprietor">
           <Key>
@@ -803,7 +803,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Issues__DriverId__5DCAEF64">
+        <Association Name="FK__Issues__DriverId__6383C8BA">
           <End Role="Drivers" Type="Self.Driver" Multiplicity="1" />
           <End Role="Issues" Type="Self.Issue" Multiplicity="*" />
           <ReferentialConstraint>
@@ -815,7 +815,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Notices__DriverI__5CD6CB2B">
+        <Association Name="FK__Notices__DriverI__628FA481">
           <End Role="Drivers" Type="Self.Driver" Multiplicity="1" />
           <End Role="Notices" Type="Self.Notice" Multiplicity="*" />
           <ReferentialConstraint>
@@ -964,11 +964,11 @@
             <End Role="Vehicles" EntitySet="Vehicles" />
             <End Role="Contracts" EntitySet="Contracts" />
           </AssociationSet>
-          <AssociationSet Name="FK__Issues__DriverId__5DCAEF64" Association="Self.FK__Issues__DriverId__5DCAEF64">
+          <AssociationSet Name="FK__Issues__DriverId__6383C8BA" Association="Self.FK__Issues__DriverId__6383C8BA">
             <End Role="Drivers" EntitySet="Drivers" />
             <End Role="Issues" EntitySet="Issues" />
           </AssociationSet>
-          <AssociationSet Name="FK__Notices__DriverI__5CD6CB2B" Association="Self.FK__Notices__DriverI__5CD6CB2B">
+          <AssociationSet Name="FK__Notices__DriverI__628FA481" Association="Self.FK__Notices__DriverI__628FA481">
             <End Role="Drivers" EntitySet="Drivers" />
             <End Role="Notices" EntitySet="Notices" />
           </AssociationSet>
@@ -1107,7 +1107,6 @@
           <EntitySetMapping Name="Drivers">
             <EntityTypeMapping TypeName="Model.Driver">
               <MappingFragment StoreEntitySet="Drivers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="SalutationId" ColumnName="SalutationId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -1128,6 +1127,7 @@
                 <ScalarProperty Name="IdentityDocuementPath" ColumnName="IdentityDocuementPath" />
                 <ScalarProperty Name="NationalityId" ColumnName="NationalityId" />
                 <ScalarProperty Name="SpecialConditions" ColumnName="SpecialConditions" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

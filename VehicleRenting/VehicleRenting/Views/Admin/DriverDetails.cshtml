@@ -1,0 +1,179 @@
+﻿@model VehicleRenting.Models.Driver
+
+@{
+    ViewBag.Title = "DriverDetails";
+}
+
+<header class="title text-left">
+    <h1>Driver Details</h1>
+    <hr />
+</header>
+
+<div>
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RentDueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RentDueDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContractFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContractTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContractLength)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecurityDepositAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecurityDepositAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdvancedRentAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdvancedRentAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoldingDepositAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoldingDepositAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminFee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminFee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReferenceDocumentPath)
+        </dt>
+
+        <dd>
+            @Html.ActionLink("Download document", "DownloadReferenceDocument", new { documentName = Model.IdentityDocuementPath })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdentityDocuementPath)
+        </dt>
+
+        <dd>
+            @Html.ActionLink("Download document", "DownloadIdentityDocument", new { documentName = Model.IdentityDocuementPath })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpecialConditions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpecialConditions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdentityType.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdentityType.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nationality.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nationality.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReferenceType.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReferenceType.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Salutation.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salutation.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SourceType.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SourceType.Title)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

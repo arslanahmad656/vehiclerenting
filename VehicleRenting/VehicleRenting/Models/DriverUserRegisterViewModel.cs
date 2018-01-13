@@ -21,7 +21,6 @@ namespace VehicleRenting.Models
         public string LastName { get; set; }
 
         [Display(Name = "Rent Due Date")]
-        [DataType(DataType.Date)]
         public Nullable<int> RentDueDate { get; set; }
 
         [DataType(DataType.Date)]
@@ -85,6 +84,10 @@ namespace VehicleRenting.Models
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email Address")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Phone No.")]
+        public string Phone { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

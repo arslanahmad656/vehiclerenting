@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a63896da962841d6b2380d623fef4d9d" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="6ca4da67e565417f95b1d0f5201277f7" Name="Diagram1">
         <EntityTypeShape EntityType="Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Appointment" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AspNetRole" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
@@ -13,24 +13,24 @@
         <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Contract" Width="1.5" PointX="15.25" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Document" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Driver" Width="2" PointX="8.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Driver" Width="1.5" PointX="8.25" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.IdentityType" Width="1.5" PointX="6" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Issue" Width="1.5" PointX="11.375" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Issue" Width="1.5" PointX="10.5" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.IssueType" Width="1.5" PointX="8.25" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Nationality" Width="1.5" PointX="6" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Notice" Width="1.5" PointX="11.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Notice" Width="1.5" PointX="10.5" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.proprietor" Width="1.5" PointX="10.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ReferenceType" Width="1.5" PointX="6" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Salutation" Width="1.5" PointX="6" PointY="16" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.SourceType" Width="1.5" PointX="6" PointY="18.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.VehicleCondition" Width="1.5" PointX="10.75" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Vehicle" Width="1.875" PointX="13" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Vehicle" Width="1.5" PointX="13" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Drivers_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Contracts_Vehicle" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__Issues__DriverId__5DCAEF64" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__Notices__DriverI__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Issues__DriverId__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Notices__DriverI__628FA481" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Drivers_Identity" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Drivers_Nationality" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Drivers_ReferenceType" ManuallyRouted="false" />

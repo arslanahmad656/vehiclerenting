@@ -21,7 +21,6 @@ namespace VehicleRenting.Models
             this.Notices = new HashSet<Notice>();
         }
     
-        public int Id { get; set; }
         public int SalutationId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -42,6 +41,7 @@ namespace VehicleRenting.Models
         public string IdentityDocuementPath { get; set; }
         public Nullable<int> NationalityId { get; set; }
         public string SpecialConditions { get; set; }
+        public int Id { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

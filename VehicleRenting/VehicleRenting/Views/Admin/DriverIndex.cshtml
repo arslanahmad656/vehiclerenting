@@ -1,0 +1,57 @@
+﻿@model IEnumerable<VehicleRenting.Models.Driver>
+
+@{
+    ViewBag.Title = "DriverIndex";
+}
+
+<header class="title text-left">
+    <h1>List of Drivers</h1>
+    <hr />
+</header>
+
+<p>
+    @Html.ActionLink("Create New", "CreateDriver")
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sr.</th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @{ int count = 0; }
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@(++count)</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditDriver", new { id=item.Id }) |
+            @Html.ActionLink("Details", "DriverDetails", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "DeleteDriver", new { id=item.Id })
+        </td>
+    </tr>
+}
+        </tbody>
+
+</table>

@@ -7,6 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 using VehicleRenting.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using VehicleRenting.App_Start;
 
 namespace VehicleRenting.Controllers
 {
@@ -341,6 +344,352 @@ namespace VehicleRenting.Controllers
             db.Entry(model).State = EntityState.Deleted;
             db.SaveChanges();
             return RedirectToAction("VehicleIndex");
+        }
+
+        #endregion
+
+        #region Driver
+
+        public ActionResult DriverIndex()
+        {
+            return View(db.Drivers.AsEnumerable());
+        }
+
+        public ActionResult DriverDetails(int id)
+        {
+            var model = db.Drivers.Find(id);
+            if (model == null)
+            {
+                return new HttpNotFoundResult("No vehicle found with the specified ID.");
+            }
+            ViewBag.SalutationId = new SelectList(db.Salutations, "Id", "Title", model.SalutationId);
+            ViewBag.ReferenceId = new SelectList(db.ReferenceTypes, "Id", "Title", model.ReferenceId);
+            ViewBag.IdentityId = new SelectList(db.IdentityTypes, "Id", "Title", model.IdentityId);
+            ViewBag.NationalityId = new SelectList(db.Nationalities, "Id", "Title", model.NationalityId);
+            ViewBag.SourceId = new SelectList(db.SourceTypes, "Id", "Title", model.SourceId);
+            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Username", model.UserId);
+            return View(model);
+        }
+
+        public ActionResult CreateDriver()
+        {
+            ViewBag.SalutationId = new SelectList(db.Salutations, "Id", "Title");
+            ViewBag.ReferenceId = new SelectList(db.ReferenceTypes, "Id", "Title");
+            ViewBag.IdentityId = new SelectList(db.IdentityTypes, "Id", "Title");
+            ViewBag.NationalityId = new SelectList(db.Nationalities, "Id", "Title");
+            ViewBag.SourceId = new SelectList(db.SourceTypes, "Id", "Title");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateDriver(DriverUserRegisterViewModel model)
+        {
+            ApplicationUser user = null;
+            bool userCreated = false;
+            bool userAddedToRole = false;
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (!model.Password.Equals(model.ConfirmPassword))
+                    {
+                        throw new Exception("Password and Confirm password fields should have the same value.");
+                    }
+
+                    user = new ApplicationUser
+                    {
+                        UserName = model.Username,
+                        Email = model.Email,
+                        PhoneNumber = model.Phone
+                    };
+
+                    var status = UserManager.Create(user, model.Password);
+
+                    if(!status.Succeeded)
+                    {
+                        var errors = "User could not be created.<br/>";
+                        foreach (var error in status.Errors)
+                        {
+                            errors += error + "<br/>";
+                        }
+                        throw new Exception(errors);
+                    }
+                    userCreated = true;
+
+                    status = UserManager.AddToRole(user.Id, ApplicationWideConstants.DriverRoleName);
+
+                    if(!status.Succeeded)
+                    {
+                        var errors = "User could not be added to the driver role.<br/>";
+                        foreach (var error in status.Errors)
+                        {
+                            errors += error + "<br/>";
+                        }
+                        throw new Exception(errors);
+                    }
+                    userAddedToRole = true;
+
+                    var referenceDocument = Request.Files["ReferenceDocumentPath"];
+                    if ((model.ReferenceId != null && (referenceDocument == null || referenceDocument.ContentLength == 0))
+                        || (model.ReferenceId == null && (referenceDocument != null || referenceDocument.ContentLength > 0)))
+                    {
+                        var error = "Either you have selected a reference type and not supplied reference document or you have not selected a reference type and supplied a reference document. Please correct this anomoly by either supplying both or none.";
+                        throw new Exception(error);
+                    }
+
+                    var identityDocument = Request.Files["IdentityDocuementPath"];
+                    if ((model.IdentityId != null && (identityDocument == null || identityDocument.ContentLength == 0))
+                        || (model.IdentityId == null && (identityDocument != null || identityDocument.ContentLength > 0)))
+                    {
+                        var error = "Either you have selected an identity type and not supplied identity document or you have not selected an identity type and supplied an identity document. Please correct this anomoly by either supplying both or none.";
+                        throw new Exception(error);
+                    }
+
+                    var driver = new Driver
+                    {
+                        AdminFee = model.AdminFee,
+                        AdvancedRentAmount = model.AdvancedRentAmount,
+                        ContractFrom = model.ContractFrom,
+                        ContractLength = model.ContractLength,
+                        ContractTo = model.ContractTo,
+                        FirstName = model.FirstName,
+                        HoldingDepositAmount = model.HoldingDepositAmount,
+                        IdentityDocuementPath = model.IdentityDocuementPath,
+                        IdentityId = model.IdentityId,
+                        LastName = model.LastName,
+                        NationalityId = model.NationalityId,
+                        ReferenceDocumentPath = model.ReferenceDocumentPath,
+                        ReferenceId = model.ReferenceId,
+                        RentDate = model.RentDate,
+                        RentDueDate = model.RentDueDate,
+                        SalutationId = model.SalutationId,
+                        SecurityDepositAmount = model.SecurityDepositAmount,
+                        SourceId = model.SourceId,
+                        SpecialConditions = model.SpecialConditions,
+                        UserId = user.Id
+                    };
+
+                    db.Drivers.Add(driver);
+                    db.SaveChanges();
+
+                    bool modificationNeeded = false;
+                    if(referenceDocument != null && referenceDocument.ContentLength > 0)
+                    {
+                        var serverPath = Server.MapPath(ApplicationWideConstants.RootStoragePath);
+                        var fileName = $"{ApplicationWideConstants.DriverReferenceDocumentName}_{driver.Id}{Path.GetExtension(referenceDocument.FileName)}";
+                        var fullPath = Path.Combine(serverPath, fileName);
+                        referenceDocument.SaveAs(fullPath);
+                        driver.ReferenceDocumentPath = fileName;
+                        modificationNeeded = true;
+                    }
+
+                    if (identityDocument != null && identityDocument.ContentLength > 0)
+                    {
+                        var serverPath = Server.MapPath(ApplicationWideConstants.RootStoragePath);
+                        var fileName = $"{ApplicationWideConstants.DriverIdentityTypeDocumentName}_{driver.Id}{Path.GetExtension(identityDocument.FileName)}";
+                        var fullPath = Path.Combine(serverPath, fileName);
+                        referenceDocument.SaveAs(fullPath);
+                        driver.IdentityDocuementPath = fileName;
+                        modificationNeeded = true;
+                    }
+
+                    if(modificationNeeded)
+                    {
+                        db.Entry(driver).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+
+                    return RedirectToAction("Index");
+                }
+                catch(Exception ex)
+                {
+                    if(userCreated)
+                    {
+                        IdentityResult result;
+                        if(userAddedToRole)
+                        {
+                            result = UserManager.RemoveFromRole(user.Id, ApplicationWideConstants.DriverRoleName);
+                        }
+                        result = UserManager.Delete(user);
+                    }
+
+                    ViewBag.SalutationId = new SelectList(db.Salutations, "Id", "Title", model.SalutationId);
+                    ViewBag.ReferenceId = new SelectList(db.ReferenceTypes, "Id", "Title", model.ReferenceId);
+                    ViewBag.IdentityId = new SelectList(db.IdentityTypes, "Id", "Title", model.IdentityId);
+                    ViewBag.NationalityId = new SelectList(db.Nationalities, "Id", "Title", model.NationalityId);
+                    ViewBag.SourceId = new SelectList(db.SourceTypes, "Id", "Title", model.SourceId);
+
+                    ModelState.AddModelError("", ex.Message);
+                    return View(model);
+                }
+            }
+            else
+            {
+                ViewBag.SalutationId = new SelectList(db.Salutations, "Id", "Title", model.SalutationId);
+                ViewBag.ReferenceId = new SelectList(db.ReferenceTypes, "Id", "Title", model.ReferenceId);
+                ViewBag.IdentityId = new SelectList(db.IdentityTypes, "Id", "Title", model.IdentityId);
+                ViewBag.NationalityId = new SelectList(db.Nationalities, "Id", "Title", model.NationalityId);
+                ViewBag.SourceId = new SelectList(db.SourceTypes, "Id", "Title", model.SourceId);
+                ModelState.AddModelError("", "Model state is invalid. Please fill in all fields properly.");
+                return View(model);
+            }
+        }
+
+        public ActionResult EditDriver(int id)
+        {
+            var model = db.Drivers.Find(id);
+            if(model == null)
+            {
+                return new HttpNotFoundResult("Could not find the driver with the specified id.");
+            }
+            ViewBag.SalutationId = new SelectList(db.Salutations, "Id", "Title", model.SalutationId);
+            ViewBag.ReferenceId = new SelectList(db.ReferenceTypes, "Id", "Title", model.ReferenceId);
+            ViewBag.IdentityId = new SelectList(db.IdentityTypes, "Id", "Title", model.IdentityId);
+            ViewBag.NationalityId = new SelectList(db.Nationalities, "Id", "Title", model.NationalityId);
+            ViewBag.SourceId = new SelectList(db.SourceTypes, "Id", "Title", model.SourceId);
+            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Username", model.UserId);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditDriver(Driver model)
+        {
+            if(ModelState.IsValid)
+            {
+                var serverPath = Server.MapPath(ApplicationWideConstants.RootStoragePath);
+                var referenceDocument = Request.Form["reference_old"];
+                var completePath = Path.Combine(serverPath, referenceDocument);
+                var file = Request.Files["ReferenceDocumentPath"];
+                referenceDocument = null;
+                serverPath = null;
+                string fullPath = null;
+
+                if (file != null && file.ContentLength > 0)
+                {
+                    if (System.IO.File.Exists(completePath))
+                    {
+                        System.IO.File.Delete(completePath);
+                    }
+
+                    referenceDocument = $"{ApplicationWideConstants.DriverReferenceDocumentName}_{model.Id}{Path.GetExtension(file.FileName)}";
+                    serverPath = Server.MapPath(ApplicationWideConstants.RootStoragePath);
+                    fullPath = Path.Combine(serverPath, referenceDocument);
+                    file.SaveAs(fullPath);
+
+                    model.ReferenceDocumentPath = referenceDocument;
+                }
+                else
+                {
+                    if (System.IO.File.Exists(completePath))
+                    {
+                        model.ReferenceDocumentPath = Request.Form["reference_old"];
+                    }
+                    else
+                    {
+                        model.ReferenceDocumentPath = "nofile";
+                    }
+                }
+
+                /////
+
+                serverPath = Server.MapPath(ApplicationWideConstants.RootStoragePath);
+                var identityDocument = Request.Form["identity_old"];
+                completePath = Path.Combine(serverPath, identityDocument);
+                file = Request.Files["IdentityDocuementPath"];
+                identityDocument = null;
+                serverPath = null;
+                fullPath = null;
+
+                if (file != null && file.ContentLength > 0)
+                {
+                    if (System.IO.File.Exists(completePath))
+                    {
+                        System.IO.File.Delete(completePath);
+                    }
+
+                    identityDocument = $"{ApplicationWideConstants.DriverIdentityTypeDocumentName}_{model.Id}{Path.GetExtension(file.FileName)}";
+                    serverPath = Server.MapPath(ApplicationWideConstants.RootStoragePath);
+                    fullPath = Path.Combine(serverPath, identityDocument);
+                    file.SaveAs(fullPath);
+
+                    model.IdentityDocuementPath = identityDocument;
+                }
+                else
+                {
+                    if (System.IO.File.Exists(completePath))
+                    {
+                        model.IdentityDocuementPath = Request.Form["identity_old"];
+                    }
+                    else
+                    {
+                        model.IdentityDocuementPath = "nofile";
+                    }
+                }
+
+                db.Entry(model).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("DriverIndex");
+
+            }
+            else
+            {
+                ViewBag.SalutationId = new SelectList(db.Salutations, "Id", "Title", model.SalutationId);
+                ViewBag.ReferenceId = new SelectList(db.ReferenceTypes, "Id", "Title", model.ReferenceId);
+                ViewBag.IdentityId = new SelectList(db.IdentityTypes, "Id", "Title", model.IdentityId);
+                ViewBag.NationalityId = new SelectList(db.Nationalities, "Id", "Title", model.NationalityId);
+                ViewBag.SourceId = new SelectList(db.SourceTypes, "Id", "Title", model.SourceId);
+                ModelState.AddModelError("", "Model state is invalid. Please fill in all fields properly.");
+                return View(model);
+            }
+        }
+
+        public ActionResult DeleteDriver(int id)
+        {
+            var model = db.Drivers.Find(id);
+            if (model == null)
+            {
+                return new HttpNotFoundResult("Contract not found with the specified id");
+            }
+            if (!string.IsNullOrWhiteSpace(model.ReferenceDocumentPath) && !model.ReferenceDocumentPath.Equals("nofile", StringComparison.OrdinalIgnoreCase))
+            {
+                var serverPath = Server.MapPath(ApplicationWideConstants.RootStoragePath);
+                var fullPath = Path.Combine(serverPath, model.ReferenceDocumentPath);
+                System.IO.File.Delete(fullPath);
+            }
+            if (!string.IsNullOrWhiteSpace(model.IdentityDocuementPath) && !model.IdentityDocuementPath.Equals("nofile", StringComparison.OrdinalIgnoreCase))
+            {
+                var serverPath = Server.MapPath(ApplicationWideConstants.RootStoragePath);
+                var fullPath = Path.Combine(serverPath, model.IdentityDocuementPath);
+                System.IO.File.Delete(fullPath);
+            }
+
+            var userId = model.UserId;
+
+            db.Entry(model).State = EntityState.Deleted;
+            db.SaveChanges();
+            
+            IdentityResult result;
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            result = UserManager.RemoveFromRole(userId, ApplicationWideConstants.DriverRoleName);
+            result = UserManager.Delete(context.Users.Find(userId));
+
+            return RedirectToAction("DriverIndex");
+        }
+
+        public FileResult DownloadReferenceDocument(string documentName)
+        {
+            var serverPath = Server.MapPath(ApplicationWideConstants.RootStoragePath);
+            var fullPath = Path.Combine(serverPath, documentName);
+            return File(fullPath, System.Net.Mime.MediaTypeNames.Application.Octet, documentName);
+        }
+
+        public FileResult DownloadIdentityDocument(string documentName)
+        {
+            var serverPath = Server.MapPath(ApplicationWideConstants.RootStoragePath);
+            var fullPath = Path.Combine(serverPath, documentName);
+            return File(fullPath, System.Net.Mime.MediaTypeNames.Application.Octet, documentName);
         }
 
         #endregion
