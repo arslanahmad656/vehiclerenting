@@ -13,12 +13,12 @@
         <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Contract" Width="1.5" PointX="15.25" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Document" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Driver" Width="1.5" PointX="8.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Driver" Width="2" PointX="8.25" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.IdentityType" Width="1.5" PointX="6" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Issue" Width="1.5" PointX="10.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Issue" Width="1.5" PointX="11.375" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.IssueType" Width="1.5" PointX="8.25" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Nationality" Width="1.5" PointX="6" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Notice" Width="1.5" PointX="10.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Notice" Width="1.5" PointX="11.75" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.proprietor" Width="1.5" PointX="10.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ReferenceType" Width="1.5" PointX="6" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Salutation" Width="1.5" PointX="6" PointY="16" IsExpanded="true" />
