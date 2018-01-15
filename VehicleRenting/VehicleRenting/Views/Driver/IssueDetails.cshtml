@@ -1,0 +1,52 @@
+﻿@model VehicleRenting.Models.Issue
+
+@{
+    ViewBag.Title = "IssueDetails";
+}
+
+<header class="title text-left">
+    <h1>
+        Your issue and support response
+    </h1>
+    <hr />
+</header>
+
+<div>
+    <dl>
+        <dt>
+            Ticket ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueType.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueType.Title)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

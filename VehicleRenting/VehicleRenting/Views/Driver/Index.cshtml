@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<header class="title text-left">
+    <h1>
+        Welcome @((string)ViewBag.DriverName)
+    </h1>
+    <hr />
+</header>
+
+@Html.ActionLink("Report an Issue", "ReportIssue");
+<br />
+@Html.ActionLink("Reported Issues", "ReportedIssuesList")
