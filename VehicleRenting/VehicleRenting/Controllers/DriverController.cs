@@ -51,6 +51,8 @@ namespace VehicleRenting.Controllers
             model.DriverId = loggedInDriverId;
             if(ModelState.IsValid)
             {
+                model.status = ApplicationWideConstants.IssueStatusPending;
+                model.reportdate = DateTime.Now;
                 db.Issues.Add(model);
                 db.SaveChanges();
                 ViewBag.IssueId = model.Id;

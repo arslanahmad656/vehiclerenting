@@ -38,5 +38,34 @@ namespace VehicleRenting.App_Start
                 return "driver";
             }
         }
+
+        public static string GetIssueStatus(bool? status)
+        {
+            if(status == null)
+            {
+                return "NA";
+            }
+            if(status == true)
+            {
+                return "Closed";
+            }
+            return "Pending";
+        }
+
+        public static bool IssueStatusPending  // Pending status is the one that is open
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public static bool IssueStatusClosed
+        {
+            get
+            {
+                return true;
+            }
+        }
     }
 }

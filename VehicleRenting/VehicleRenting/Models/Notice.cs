@@ -14,6 +14,12 @@ namespace VehicleRenting.Models
     
     public partial class Notice
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Notice()
+        {
+            this.noticereplies = new HashSet<noticereply>();
+        }
+    
         public int Id { get; set; }
         public System.DateTime NoticeDate { get; set; }
         public System.DateTime CheckoutDate { get; set; }
@@ -21,5 +27,7 @@ namespace VehicleRenting.Models
         public int DriverId { get; set; }
     
         public virtual Driver Driver { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<noticereply> noticereplies { get; set; }
     }
 }

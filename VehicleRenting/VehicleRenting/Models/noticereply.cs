@@ -12,18 +12,13 @@ namespace VehicleRenting.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Issue
+    public partial class noticereply
     {
-        public int Id { get; set; }
-        public int IssueTypeId { get; set; }
-        public string Subject { get; set; }
-        public string Description { get; set; }
-        public int DriverId { get; set; }
-        public Nullable<bool> status { get; set; }
-        public Nullable<System.DateTime> reportdate { get; set; }
-        public Nullable<System.DateTime> closedate { get; set; }
+        public int id { get; set; }
+        public string reply { get; set; }
+        public System.DateTime replydate { get; set; }
+        public int noticeid { get; set; }
     
-        public virtual Driver Driver { get; set; }
-        public virtual IssueType IssueType { get; set; }
+        public virtual Notice Notice { get; set; }
     }
 }

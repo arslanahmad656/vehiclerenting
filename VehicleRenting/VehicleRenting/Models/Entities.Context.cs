@@ -38,6 +38,7 @@ namespace VehicleRenting.Models
         public virtual DbSet<Issue> Issues { get; set; }
         public virtual DbSet<IssueType> IssueTypes { get; set; }
         public virtual DbSet<Nationality> Nationalities { get; set; }
+        public virtual DbSet<noticereply> noticereplies { get; set; }
         public virtual DbSet<Notice> Notices { get; set; }
         public virtual DbSet<proprietor> proprietors { get; set; }
         public virtual DbSet<ReferenceType> ReferenceTypes { get; set; }

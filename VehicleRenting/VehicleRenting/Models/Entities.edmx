@@ -140,6 +140,9 @@
           <Property Name="Subject" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="2048" Nullable="false" />
           <Property Name="DriverId" Type="int" Nullable="false" />
+          <Property Name="status" Type="bit" />
+          <Property Name="reportdate" Type="datetime" />
+          <Property Name="closedate" Type="datetime" />
         </EntityType>
         <EntityType Name="IssueTypes">
           <Key>
@@ -156,6 +159,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Code" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="noticereply">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reply" Type="varchar" MaxLength="2048" Nullable="false" />
+          <Property Name="replydate" Type="datetime" Nullable="false" />
+          <Property Name="noticeid" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Notices">
           <Key>
@@ -397,6 +409,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NOTICEREPLY_NOTICE">
+          <End Role="Notices" Type="Self.Notices" Multiplicity="1" />
+          <End Role="noticereply" Type="Self.noticereply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="noticereply">
+              <PropertyRef Name="noticeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Vehicles_Proprietor">
           <End Role="proprietor" Type="Self.proprietor" Multiplicity="1" />
           <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
@@ -436,6 +460,7 @@
           <EntitySet Name="Issues" EntityType="Self.Issues" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IssueTypes" EntityType="Self.IssueTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Nationalities" EntityType="Self.Nationalities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="noticereply" EntityType="Self.noticereply" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notices" EntityType="Self.Notices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="proprietor" EntityType="Self.proprietor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReferenceTypes" EntityType="Self.ReferenceTypes" Schema="dbo" store:Type="Tables" />
@@ -498,6 +523,10 @@
           <AssociationSet Name="FK_Issues_IssueType" Association="Self.FK_Issues_IssueType">
             <End Role="IssueTypes" EntitySet="IssueTypes" />
             <End Role="Issues" EntitySet="Issues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOTICEREPLY_NOTICE" Association="Self.FK_NOTICEREPLY_NOTICE">
+            <End Role="Notices" EntitySet="Notices" />
+            <End Role="noticereply" EntitySet="noticereply" />
           </AssociationSet>
           <AssociationSet Name="FK_Vehicles_Proprietor" Association="Self.FK_Vehicles_Proprietor">
             <End Role="proprietor" EntitySet="proprietor" />
@@ -657,6 +686,9 @@
           <Property Name="Subject" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DriverId" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="reportdate" Type="DateTime" Precision="3" />
+          <Property Name="closedate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Driver" Relationship="Self.FK__Issues__DriverId__6383C8BA" FromRole="Issues" ToRole="Drivers" />
           <NavigationProperty Name="IssueType" Relationship="Self.FK_Issues_IssueType" FromRole="Issues" ToRole="IssueTypes" />
         </EntityType>
@@ -678,6 +710,16 @@
           <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Drivers" Relationship="Self.FK_Drivers_Nationality" FromRole="Nationalities" ToRole="Drivers" />
         </EntityType>
+        <EntityType Name="noticereply">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reply" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="replydate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="noticeid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Notice" Relationship="Self.FK_NOTICEREPLY_NOTICE" FromRole="noticereply" ToRole="Notices" />
+        </EntityType>
         <EntityType Name="Notice">
           <Key>
             <PropertyRef Name="Id" />
@@ -688,6 +730,7 @@
           <Property Name="Reason" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DriverId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Driver" Relationship="Self.FK__Notices__DriverI__628FA481" FromRole="Notices" ToRole="Drivers" />
+          <NavigationProperty Name="noticereplies" Relationship="Self.FK_NOTICEREPLY_NOTICE" FromRole="Notices" ToRole="noticereply" />
         </EntityType>
         <EntityType Name="proprietor">
           <Key>
@@ -899,6 +942,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NOTICEREPLY_NOTICE">
+          <End Role="Notices" Type="Self.Notice" Multiplicity="1" />
+          <End Role="noticereply" Type="Self.noticereply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="noticereply">
+              <PropertyRef Name="noticeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Vehicles_Proprietor">
           <End Role="proprietor" Type="Self.proprietor" Multiplicity="1" />
           <End Role="Vehicles" Type="Self.Vehicle" Multiplicity="*" />
@@ -941,6 +996,7 @@
           <EntitySet Name="Issues" EntityType="Self.Issue" />
           <EntitySet Name="IssueTypes" EntityType="Self.IssueType" />
           <EntitySet Name="Nationalities" EntityType="Self.Nationality" />
+          <EntitySet Name="noticereplies" EntityType="Self.noticereply" />
           <EntitySet Name="Notices" EntityType="Self.Notice" />
           <EntitySet Name="proprietors" EntityType="Self.proprietor" />
           <EntitySet Name="ReferenceTypes" EntityType="Self.ReferenceType" />
@@ -995,6 +1051,10 @@
           <AssociationSet Name="FK_Issues_IssueType" Association="Self.FK_Issues_IssueType">
             <End Role="IssueTypes" EntitySet="IssueTypes" />
             <End Role="Issues" EntitySet="Issues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOTICEREPLY_NOTICE" Association="Self.FK_NOTICEREPLY_NOTICE">
+            <End Role="Notices" EntitySet="Notices" />
+            <End Role="noticereply" EntitySet="noticereplies" />
           </AssociationSet>
           <AssociationSet Name="FK_Vehicles_Proprietor" Association="Self.FK_Vehicles_Proprietor">
             <End Role="proprietor" EntitySet="proprietors" />
@@ -1148,6 +1208,9 @@
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="reportdate" ColumnName="reportdate" />
+                <ScalarProperty Name="closedate" ColumnName="closedate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1166,6 +1229,16 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="noticereplies">
+            <EntityTypeMapping TypeName="Model.noticereply">
+              <MappingFragment StoreEntitySet="noticereply">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="reply" ColumnName="reply" />
+                <ScalarProperty Name="replydate" ColumnName="replydate" />
+                <ScalarProperty Name="noticeid" ColumnName="noticeid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

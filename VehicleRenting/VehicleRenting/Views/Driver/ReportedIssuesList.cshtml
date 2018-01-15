@@ -1,4 +1,6 @@
-﻿@model IEnumerable<VehicleRenting.Models.Issue>
+﻿@using VehicleRenting.Models
+@using VehicleRenting.App_Start
+@model IEnumerable<VehicleRenting.Models.Issue>
 
 @{
     ViewBag.Title = "ReportedIssuesList";
@@ -23,6 +25,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.IssueType.Title)
             </th>
+            <th>
+                Report Time
+            </th>
+            <th>
+                Status
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -37,6 +45,12 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.IssueType.Title)
+                </td>
+                <td>
+                    @(item.reportdate)
+                </td>
+                <td>
+                    @(ApplicationWideConstants.GetIssueStatus(item.status))
                 </td>
                 <td>
                     @Html.ActionLink("Details", "IssueDetails", new { id = item.Id })
