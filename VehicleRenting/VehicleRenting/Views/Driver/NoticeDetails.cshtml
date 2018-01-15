@@ -1,7 +1,10 @@
-﻿@model VehicleRenting.Models.Notice
+﻿@using VehicleRenting.Models;
+@model Notice
 
 @{
     ViewBag.Title = "IssueDetails";
+    var replyExists = (bool)ViewBag.ReplyExists;
+    noticereply reply = replyExists ? (noticereply)ViewBag.Reply : null;
 }
 
 <header class="title text-left">
@@ -47,6 +50,30 @@
 
     </dl>
 </div>
+
+<hr />
+
+<div>
+    <h2>Support Response</h2>
+    <hr />
+    <div>
+        @if (!replyExists)
+        {
+            <p class="text-danger">There is no response from support yet. It'll soon be available at the earliest possible.</p>
+        }
+        else
+        {
+            <p><b>Support has replied to your notice at <i>@reply.replydate</i></b></p>
+            <p style="padding-left:2em; text-align: justify; font-family: monospace sans-serif">
+                @reply.reply
+            </p>
+        }
+    </div>
+</div>
+
+<br />
+
+
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>

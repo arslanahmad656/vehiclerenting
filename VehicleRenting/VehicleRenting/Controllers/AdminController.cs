@@ -712,6 +712,19 @@ namespace VehicleRenting.Controllers
             return View(model);
         }
 
+        public ActionResult CloseIssue(int id)
+        {
+            var model = db.Issues.Find(id);
+            if (model == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "No issue found with the specified ticket.");
+            }
+            model.status = ApplicationWideConstants.IssueStatusClosed;
+            db.Entry(model).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("ReportedIssuesList");
+        }
+
         #endregion
 
         #region Notice
@@ -723,8 +736,55 @@ namespace VehicleRenting.Controllers
 
         public ActionResult NoticeDetails(int id)
         {
-            Notice model = db.Notices.First();
+            Notice model = db.Notices.Find(id);
+            if (model == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "No notice found with the specified ticket.");
+            }
+            var replyexists = true;
+            noticereply reply = null;
+            try
+            {
+                reply = db.noticereplies.Where(nr => nr.noticeid == id).First();
+            }
+            catch(Exception ex)
+            {
+                replyexists = false;
+            }
+            ViewBag.ReplyExists = replyexists;
+            if(replyexists)
+            {
+                ViewBag.Reply = reply;
+            }
             return View(model);
+        }
+
+        public ActionResult ReplyToNotice(int id)   // notice id
+        {
+            Notice model = db.Notices.First();
+            if (model == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "No notice found with the specified ticket.");
+            }
+            ViewBag.NoticeId = id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ReplyToNotice(noticereply model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.replydate = DateTime.Now;
+                db.noticereplies.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("NoticeList");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Please fill in all the fields properly.");
+                return View(model);
+            }
         }
 
         #endregion

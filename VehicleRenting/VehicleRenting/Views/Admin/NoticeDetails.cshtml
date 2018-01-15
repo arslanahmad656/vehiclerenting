@@ -1,7 +1,10 @@
-﻿@model VehicleRenting.Models.Notice
+﻿@using VehicleRenting.Models;
+@model Notice
 
 @{
     ViewBag.Title = "IssueDetails";
+    var replyExists = (bool)ViewBag.ReplyExists;
+    noticereply reply = replyExists ? (noticereply)ViewBag.Reply : null;
 }
 
 <header class="title text-left">
@@ -45,8 +48,32 @@
             @Html.DisplayFor(model => model.Reason)
         </dd>
 
+        <dt>
+            Driver
+        </dt>
+
+        <dd>
+            @Model.Driver.AspNetUser.UserName
+        </dd>
+
     </dl>
 </div>
+<hr />
+
+<div>
+    <div>
+        @if(!replyExists)
+        {
+            @Html.ActionLink("Reply to notice", "ReplyToNotice", new { id = Model.Id })
+        }
+        else
+        {
+            <p>You have already replied to this notice.</p>
+        }
+    </div>
+</div>
+
+<br />
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>

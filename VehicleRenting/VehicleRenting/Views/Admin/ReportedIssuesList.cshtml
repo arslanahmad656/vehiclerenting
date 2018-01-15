@@ -6,7 +6,7 @@
 
 <header class="title text-left">
     <h1>
-        View your issues here
+        Driver's Issues
     </h1>
     <hr />
 </header>
@@ -29,6 +29,9 @@
             <th>
                 Status
             </th>
+            <th>
+                Driver
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -49,6 +52,9 @@
                 </td>
                 <td>
                     @(VehicleRenting.App_Start.ApplicationWideConstants.GetIssueStatus(item.status))
+                </td>
+                <td>
+                    @item.Driver.AspNetUser.UserName
                 </td>
                 <td>
                     @Html.ActionLink("Details", "IssueDetails", new { id = item.Id })

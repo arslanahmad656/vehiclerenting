@@ -145,6 +145,24 @@ namespace VehicleRenting.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
+
+            var replyexists = true;
+            noticereply reply = null;
+
+            try
+            {
+                reply = db.noticereplies.Where(nr => nr.noticeid == id).First();
+            }
+            catch (Exception ex)
+            {
+                replyexists = false;
+            }
+            ViewBag.ReplyExists = replyexists;
+            if (replyexists)
+            {
+                ViewBag.Reply = reply;
+            }
+
             return View(model);
         }
 
