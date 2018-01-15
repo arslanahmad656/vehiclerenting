@@ -714,6 +714,21 @@ namespace VehicleRenting.Controllers
 
         #endregion
 
+        #region Notice
+
+        public ActionResult NoticeList()
+        {
+            return View(db.Notices.ToList());
+        }
+
+        public ActionResult NoticeDetails(int id)
+        {
+            Notice model = db.Notices.First();
+            return View(model);
+        }
+
+        #endregion
+
         #region others
 
         public ActionResult GetAllFiles()
