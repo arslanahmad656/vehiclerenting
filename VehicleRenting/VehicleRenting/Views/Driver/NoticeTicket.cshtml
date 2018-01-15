@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IssueTicket</title>
+</head>
+<body>
+    <div>
+    </div>
+    <script>
+        alert('@($"Your issue has been reported. Your ticket number is {(int)ViewBag.NoticeId}")');
+        location.href = '@Url.Action("Index")';
+    </script>
+</body>
+</html>

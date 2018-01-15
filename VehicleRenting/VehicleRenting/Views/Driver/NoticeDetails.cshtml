@@ -1,0 +1,52 @@
+﻿@model VehicleRenting.Models.Notice
+
+@{
+    ViewBag.Title = "IssueDetails";
+}
+
+<header class="title text-left">
+    <h1>
+        Your notice
+    </h1>
+    <hr />
+</header>
+
+<div>
+    <dl>
+        <dt>
+            Ticket ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckoutDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckoutDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoticeDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoticeDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reason)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reason)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

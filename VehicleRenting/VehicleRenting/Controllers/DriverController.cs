@@ -32,6 +32,8 @@ namespace VehicleRenting.Controllers
             return View();
         }
 
+        #region Issues
+
         public ActionResult ReportIssue()
         {
             ViewBag.IssueTypeId = new SelectList(db.IssueTypes, "Id", "Title");
@@ -86,5 +88,64 @@ namespace VehicleRenting.Controllers
             }
             return View(model);
         }
+
+        #endregion
+
+        #region Notices
+
+        public ActionResult GiveNotice()
+        {
+            var loggedInUserId = User.Identity.GetUserId();
+            var loggedInDriverId = db.Drivers.Where(d => d.UserId.Equals(loggedInUserId)).First().Id;
+            ViewBag.DriverId = loggedInDriverId;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GiveNotice(Notice model)
+        {
+            var loggedInUserId = User.Identity.GetUserId();
+            var loggedInDriverId = db.Drivers.Where(d => d.UserId.Equals(loggedInUserId)).First().Id;
+            model.DriverId = loggedInDriverId;
+            if (ModelState.IsValid)
+            {
+                db.Notices.Add(model);
+                db.SaveChanges();
+                ViewBag.NoticeId = model.Id;
+                return View("NoticeTicket");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Please fill in all the fields correctly.");
+                ViewBag.DriverId = loggedInDriverId;
+                return View(model);
+            }
+        }
+
+        public ActionResult NoticeList()
+        {
+            var loggedInUserId = User.Identity.GetUserId();
+            var loggedInDriverId = db.Drivers.Where(d => d.UserId.Equals(loggedInUserId)).First().Id;
+            var noticesRelatedToLoggedInDriver = db.Notices.Where(notice => notice.DriverId == loggedInDriverId).ToList();
+            return View(noticesRelatedToLoggedInDriver);
+        }
+
+        public ActionResult NoticeDetails(int id)
+        {
+            var loggedInUserId = User.Identity.GetUserId();
+            var loggedInDriverId = db.Drivers.Where(d => d.UserId.Equals(loggedInUserId)).First().Id;
+            Notice model = null;
+            try
+            {
+                model = db.Notices.Where(notice => notice.DriverId == loggedInDriverId).Where(notice => notice.Id == id).First();
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+            return View(model);
+        }
+
+        #endregion
     }
 }
