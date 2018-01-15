@@ -368,6 +368,8 @@
     <Content Include="Views\Driver\IssueTicket.cshtml" />
     <Content Include="Views\Driver\ReportedIssuesList.cshtml" />
     <Content Include="Views\Driver\IssueDetails.cshtml" />
+    <Content Include="Views\Admin\ReportedIssuesList.cshtml" />
+    <Content Include="Views\Admin\IssueDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

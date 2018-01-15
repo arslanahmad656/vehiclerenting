@@ -10,6 +10,7 @@ using VehicleRenting.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using VehicleRenting.App_Start;
+using System.Net;
 
 namespace VehicleRenting.Controllers
 {
@@ -690,6 +691,25 @@ namespace VehicleRenting.Controllers
             var serverPath = Server.MapPath(ApplicationWideConstants.RootStoragePath);
             var fullPath = Path.Combine(serverPath, documentName);
             return File(fullPath, System.Net.Mime.MediaTypeNames.Application.Octet, documentName);
+        }
+
+        #endregion
+
+        #region Issues
+
+        public ActionResult ReportedIssuesList()
+        {
+            return View(db.Issues.ToList());
+        }
+
+        public ActionResult IssueDetails(int id)
+        {
+            var model = db.Issues.Find(id);
+            if(model == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "No issue found with the specified ticket.");
+            }
+            return View(model);
         }
 
         #endregion

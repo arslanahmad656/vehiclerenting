@@ -1,0 +1,53 @@
+﻿@model IEnumerable<VehicleRenting.Models.Issue>
+
+@{
+    ViewBag.Title = "ReportedIssuesList";
+}
+
+<header class="title text-left">
+    <h1>
+        View your issues here
+    </h1>
+    <hr />
+</header>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Sr.
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IssueType.Title)
+            </th>
+            <th>
+                Driver
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int count = 0; }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@(++count)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IssueType.Title)
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Driver.AspNetUser.UserName)</td>
+                <td>
+                    @Html.ActionLink("Details", "IssueDetails", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
