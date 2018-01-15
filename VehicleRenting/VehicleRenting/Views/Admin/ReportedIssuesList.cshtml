@@ -24,7 +24,10 @@
                 @Html.DisplayNameFor(model => model.IssueType.Title)
             </th>
             <th>
-                Driver
+                Report Time
+            </th>
+            <th>
+                Status
             </th>
             <th></th>
         </tr>
@@ -41,7 +44,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.IssueType.Title)
                 </td>
-                <td>@Html.DisplayFor(modelItem => item.Driver.AspNetUser.UserName)</td>
+                <td>
+                    @(item.reportdate)
+                </td>
+                <td>
+                    @(VehicleRenting.App_Start.ApplicationWideConstants.GetIssueStatus(item.status))
+                </td>
                 <td>
                     @Html.ActionLink("Details", "IssueDetails", new { id = item.Id })
                 </td>

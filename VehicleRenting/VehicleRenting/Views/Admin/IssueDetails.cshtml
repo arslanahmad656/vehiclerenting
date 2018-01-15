@@ -22,14 +22,6 @@
         </dd>
 
         <dt>
-            Driver
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Driver.AspNetUser.UserName)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Subject)
         </dt>
 
@@ -51,6 +43,22 @@
 
         <dd>
             @Html.DisplayFor(model => model.IssueType.Title)
+        </dd>
+
+        <dt>
+            Status
+        </dt>
+
+        <dd>
+            @(VehicleRenting.App_Start.ApplicationWideConstants.GetIssueStatus(Model.status))
+        </dd>
+
+        <dt>
+            Report Time
+        </dt>
+
+        <dd>
+            @Model.reportdate
         </dd>
 
     </dl>
