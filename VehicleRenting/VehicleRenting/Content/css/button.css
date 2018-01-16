@@ -1,10 +1,12 @@
-﻿button, input[type=submit], input[type=reset], .btn {
+﻿a.btn, button, input[type=submit], input[type=reset], .btn {
     font-family: Calibri, sans-serif;
     text-transform: uppercase;
     box-sizing: content-box;
     transition: background-color 0.5s;
     border: none;
     cursor: pointer;
+    padding: 10px 20px;
+    display: inline-block;
 }
 
 .btn-primary {

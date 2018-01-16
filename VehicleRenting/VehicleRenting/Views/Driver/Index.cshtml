@@ -10,10 +10,88 @@
     <hr />
 </header>
 
-@Html.ActionLink("Report an Issue", "ReportIssue");
 <br />
-@Html.ActionLink("Reported Issues", "ReportedIssuesList")
 <br />
-@Html.ActionLink("Give Notice", "GiveNotice")
 <br />
-@Html.ActionLink("Given Notices", "NoticeList")
+
+<div style="text-align: center">
+    <div class="box" id="box1">
+        <div class="box-title">Issues</div>
+        <div class="box-body">
+            This is where you can report the issues.
+            <br />
+            <br />
+            @Html.ActionLink("Report an Issue", "ReportIssue", null, new { @class = "btn btn-primary" })
+            <br />
+            <br />
+            @Html.ActionLink("See Reported Issues", "ReportedIssuesList", null, new { @class = "btn btn-primary" })
+            <br />
+            <br />
+        </div>
+    </div>
+
+    <div class="box" id="box2">
+        <div class="box-title">Notices</div>
+        <div class="box-body">
+            This is where you can give notices and the responses to your given notices.
+            <br />
+            <br />
+            @Html.ActionLink("Give Notice", "GiveNotice", null, new { @class = "btn btn-primary" })
+            <br />
+            <br />
+            @Html.ActionLink("Given Notices", "NoticeList", null, new { @class = "btn btn-primary" })
+            <br />
+            <br />
+        </div>
+    </div>
+</div>
+
+<br /><br /><br />
+
+<p>
+    You are browsing from @Request.UserHostAddress
+</p>
+
+@section Scripts{
+
+    <script>
+        (function setBoxHeightsSame() {
+            var box1 = $('#box1');
+            var box2 = $('#box2');
+            var height1 = Number(box1.css('height').slice(0, -2));
+            var height2 = Number(box2.css('height').slice(0, -2));
+            if (height1 > height2) {
+                box2.css('height', height1 + 'px');
+            } else {
+                box1.css('height', height2 + 'px');
+            }
+
+            var box1Buttons = box1.find('.box-body a.btn');
+            var maxWidth1 = 0;
+            box1Buttons.each(function () {
+                var currentWidth = Number($(this).css('width').slice(0, -2));
+                if (currentWidth > maxWidth1) {
+                    maxWidth1 = currentWidth;
+                }
+            });
+
+            box1Buttons.each(function () {
+                $(this).css('min-width', maxWidth1 + 'px');
+            });
+
+            var box2Buttons = box2.find('.box-body a.btn');
+            var maxWidth2 = 0;
+            box2Buttons.each(function () {
+                var currentWidth = Number($(this).css('width').slice(0, -2));
+                if (currentWidth > maxWidth2) {
+                    maxWidth2 = currentWidth;
+                }
+            });
+
+            box2Buttons.each(function () {
+                $(this).css('min-width', maxWidth2 + 'px');
+            });
+
+        })();
+    </script>
+}

@@ -29,6 +29,7 @@ namespace VehicleRenting.Controllers
             //ViewBag.DriverName = $"{loggedInDriver.FirstName} {loggedInDriver.LastName}";
             var fullName = $"{loggedInDriver.FirstName} {loggedInDriver.LastName}";
             ViewBag.DriverName = fullName;
+
             return View();
         }
 
