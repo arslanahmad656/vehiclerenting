@@ -1,0 +1,227 @@
+﻿<!DOCTYPE HTML>
+
+<html>
+<head>
+    <script src="https://use.fontawesome.com/e17edf80d0.js"></script>
+    <meta charset="utf-8" />
+    <title>Vehicle - @ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/css/common.css" />
+    <link rel="stylesheet" href="~/Content/css/header_footer.css" />
+    <link rel="stylesheet" href="~/Content/css/form.css" />
+    <link rel="stylesheet" href="~/Content/css/Table.css" />
+    <link rel="stylesheet" href="~/Content/css/button.css" />
+    <style>
+        .box {
+            box-shadow: 0px 16px 32px #aaa, 0 0 4px #777;
+            display: inline-block;
+            margin-right: 4%;
+            width: 45%;
+            overflow: hidden;
+            padding: 0;
+            border-collapse: collapse;
+            vertical-align: top;
+        }
+
+            .box:last-child {
+                margin-right: 0px;
+            }
+
+            .box .box-title {
+                border-bottom: 1px solid rgb(41, 57, 85);
+                padding: 0.85em 2em;
+                text-align: center;
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                color: white;
+                background-color: rgba(41, 57, 85, 0.75);
+                text-transform: uppercase;
+            }
+
+            .box .box-body {
+                text-align: center;
+                padding: 0.85em 2em;
+            }
+
+
+            /* 
+                Specific to the admin
+            */
+            .nav {
+        width: 20%;
+        display: inline-block;
+        vertical-align: top;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        background-color: rgb(26, 70, 100);
+        font-weight: 100;
+        font-family: Calibri, 'Trebuchet MS', 'Segoe UI', sans-serif;
+        text-transform: uppercase;
+        font-size: 1em;
+    }
+
+    .content{
+        width: 80%;
+        display: inline-block;
+        vertical-align: top;
+        margin-left: -6px;
+        float: right;
+    }
+
+    .nav ul {
+        padding: 0;
+    }
+
+    .nav ul li {
+        list-style-type: none;
+    }
+
+    .nav ul li a {
+        color: white;
+        display: block;
+        padding: 8px 16px;
+        transition: background-color 0.5s,
+            color 0.5s;
+    }
+
+    .nav ul li a.active {
+        background-color: rgba(0, 18, 30, 0.60);
+        transition: background-color 2.5s,
+            color 2.5s;
+    }
+
+    .nav ul li a:hover {
+        background-color: rgb(0, 18, 30);
+        text-decoration: none;
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="inline-block">
+            <img src="~/Content/Images/brand-logo.png" style="width:248px;height:109px;" alt="brand logo" />
+        </div>
+        <div class="inline-block nav-container">
+            <nav class="nav-main">
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Index", "Home")">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">About Us</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Contact", "Home")">Contact Us</a>
+                    </li>
+                    <li>
+                        <a href="#">Book Online</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Login", "Account")">Members Area</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div style="width: 100%;">
+        <div class="nav">
+            <ul>
+                <li>
+                    <a href="@Url.Action("Index")" id="link-home">
+                        <p>
+                            <span class="fa fa-home" style="vertical-align: middle"></span><span>&nbsp;Home</span>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ContractIndex")" id="link-contract">
+                        <p>
+                            <span class="fa fa-book" style="vertical-align: middle"></span><span>&nbsp;Contracts</span>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ProprietorIndex")" id="link-proprieter">
+                        <p>
+                            <span class="fa fa-address-card" style="vertical-align: middle"></span><span>&nbsp;Proprietors</span>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("VehicleIndex")" id="link-vehicle">
+                        <p>
+                            <span class="fa fa-car" style="vertical-align: middle"></span><span>&nbsp;Vehicles</span>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("DriverIndex")" id="link-driver">
+                        <p>
+                            <span class="fa fa-user-circle" style="vertical-align: middle"></span><span>&nbsp;Drivers</span>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ReportedIssuesList")" id="link-issue">
+                        <p>
+                            <span class="fa fa-exclamation-circle" style="vertical-align: middle"></span><span>&nbsp;Reported Issues</span>
+                        </p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@Url.Action("NoticeList")" id="link-notice">
+                        <p>
+                            <span class="fa fa-bell" style="vertical-align: middle"></span><span>&nbsp;Given Notices</span>
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            @RenderBody()
+        </div>
+    </div>
+    <div style="clear: both"></div>
+
+    <footer>
+        <div class="inline-block">
+            <img src="~/Content/Images/brand-logo.png" style="width:248px;height:109px;" alt="brand logo" />
+        </div>
+        <div class="nav-container nav-sub-container">
+            <nav class="nav-sub">
+                <ul>
+                    <li>
+                        <a href="#">Rentals</a>
+                    </li>
+                    <li>
+                        <a href="#">Maintenance</a>
+                    </li>
+                    <li>
+                        <a href="#">Reparirs</a>
+                    </li>
+                    <li>
+                        <a href="#">Body Works</a>
+                    </li>
+                    <li>
+                        <a href="#">Parts</a>
+                    </li>
+                    <li>
+                        <a href="#">Card Processing</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+        $(document).ready(function () {
+            var contentHeight = Number($('.content').css('height').slice(0, -2)) - 85;
+            $('.nav').css('height', contentHeight + 'px');
+        })
+    </script>
+</body>
+</html>

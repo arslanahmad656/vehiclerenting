@@ -5,9 +5,11 @@
 
 <header class="title">
     <h1>Admin Home</h1>
+    <hr />
 </header>
 
-@Html.ActionLink("Contracts", "ContractIndex")
+
+@*@Html.ActionLink("Contracts", "ContractIndex")
 <br />
 @Html.ActionLink("Proprietors", "ProprietorIndex")
 <br />
@@ -17,4 +19,10 @@
 <br />
 @Html.ActionLink("Reported Issues", "ReportedIssuesList")
 <br />
-@Html.ActionLink("Given Notices", "NoticeList")
+@Html.ActionLink("Given Notices", "NoticeList")*@
+
+@section Scripts {
+    <script>
+        $('#link-home').addClass('active');
+    </script>
+}

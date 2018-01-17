@@ -66,5 +66,5 @@
 <br />
 @Html.ActionLink("Close Issue", "CloseIssue", new { id = Model.Id }, new { @class = "btn btn-primary" })
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    <span class="fa fa-arrow-circle-left"></span><a href="@Url.Action("ReportedIssueList")">Back to List</a>
 </p>

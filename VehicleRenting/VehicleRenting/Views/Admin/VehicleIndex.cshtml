@@ -60,12 +60,26 @@
             @Html.DisplayFor(modelItem => item.proprietor.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "EditVehicle", new { id = item.Id }) |
-            @Html.ActionLink("Details", "VehicleDetails", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "DeleteVehicle", new { id = item.Id })
+            <a title="Edit Details" href="@Url.Action("EditVehicle", new { id = item.Id })">
+                <span class="fa fa-pencil-square-o"></span>
+            </a>
+
+            <a title="View Details" href="@Url.Action("VehicleDetails", new { id = item.Id })">
+                <span class="fa fa-file-text-o"></span>
+            </a>
+
+            <a title="Delete" href="@Url.Action("DeleteVehicle", new { id = item.Id })">
+                <span class="fa fa fa-trash-o"></span>
+            </a>
         </td>
     </tr>
 }
     </tbody>
 
 </table>
+
+@section Scripts {
+    <script>
+        $('#link-vehicle').addClass('active');
+    </script>
+}

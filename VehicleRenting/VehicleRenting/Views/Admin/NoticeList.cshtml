@@ -51,7 +51,9 @@
                     @item.Driver.AspNetUser.UserName
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "NoticeDetails", new { id = item.Id })
+                    <a title="View Details" href="@Url.Action("NoticeDetails", new { id = item.Id })">
+                        <span class="fa fa-file-text-o"></span>
+                    </a>
                 </td>
             </tr>
         }
@@ -59,3 +61,9 @@
     </tbody>
 
 </table>
+
+@section Scripts {
+    <script>
+        $('#link-notice').addClass('active');
+    </script>
+}

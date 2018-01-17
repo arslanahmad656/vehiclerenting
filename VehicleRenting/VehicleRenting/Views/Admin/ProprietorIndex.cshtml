@@ -40,13 +40,32 @@ else
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "EditProprietor", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "ProprietorDetails", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "DeleteProprietor", new { id = item.Id })
+                        <a title="Edit Details" href="@Url.Action("EditProprietor", new { id = item.Id })">
+                            <span class="fa fa-pencil-square-o"></span>
+                        </a>
+
+                        <a title="View Details" href="@Url.Action("ProprietorDetails", new { id = item.Id })">
+                            <span class="fa fa-file-text-o"></span>
+                        </a>
+
+                        <a title="Delete" href="@Url.Action("DeleteProprietor", new { id = item.Id })">
+                            <span class="fa fa fa-trash-o"></span>
+                        </a>
                     </td>
                 </tr>
             }
         </tbody>
 
     </table>
+}
+@section Scripts{
+    <script>
+        $('.content > *').each(function () {
+            $(this)
+                .css('padding-left', '8px')
+                .css('padding-right', '8px');
+        });
+
+        $('#link-proprieter').addClass('active');
+    </script>
 }

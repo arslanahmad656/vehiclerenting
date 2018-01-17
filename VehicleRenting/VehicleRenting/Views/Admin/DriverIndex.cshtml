@@ -46,12 +46,26 @@
             @Html.DisplayFor(modelItem => item.AspNetUser.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "EditDriver", new { id=item.Id }) |
-            @Html.ActionLink("Details", "DriverDetails", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "DeleteDriver", new { id=item.Id })
+            <a title="Edit Details" href="@Url.Action("EditDriver", new { id = item.Id })">
+                <span class="fa fa-pencil-square-o"></span>
+            </a>
+
+            <a title="View Details" href="@Url.Action("DriverDetails", new { id = item.Id })">
+                <span class="fa fa-file-text-o"></span>
+            </a>
+
+            <a title="Delete" href="@Url.Action("DeleteDriver", new { id = item.Id })">
+                <span class="fa fa fa-trash-o"></span>
+            </a>
         </td>
     </tr>
 }
         </tbody>
 
 </table>
+
+@section Scripts {
+    <script>
+        $('#link-driver').addClass('active');
+    </script>
+}

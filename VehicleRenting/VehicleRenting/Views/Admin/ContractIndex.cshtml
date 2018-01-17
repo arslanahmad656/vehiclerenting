@@ -51,13 +51,27 @@ else
                         @Html.DisplayFor(modelItem => item.Vehicle.RegistrationNo)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "EditContract", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "ContractDetails", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "DeleteContract", new { id = item.Id })
+                        <a title="Edit Details" href="@Url.Action("EditContract", new { id = item.Id })">
+                            <span class = "fa fa-pencil-square-o"></span>
+                        </a>
+
+                        <a title="View Details" href="@Url.Action("ContractDetails", new { id = item.Id })">
+                            <span class="fa fa-file-text-o"></span>
+                        </a>
+
+                        <a title="Delete" href="@Url.Action("DeleteContract", new { id = item.Id })">
+                            <span class="fa fa fa-trash-o"></span>
+                        </a>
                     </td>
                 </tr>
             }
         </tbody>
 
     </table>
+}
+
+@section Scripts {
+    <script>
+        $('#link-contract').addClass('active');
+    </script>
 }

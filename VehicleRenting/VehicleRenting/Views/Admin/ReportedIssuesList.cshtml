@@ -57,7 +57,9 @@
                     @item.Driver.AspNetUser.UserName
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "IssueDetails", new { id = item.Id })
+                    <a title="View Details" href="@Url.Action("IssueDetails", new { id = item.Id })">
+                        <span class="fa fa-file-text-o"></span>
+                    </a>
                 </td>
             </tr>
         }
@@ -65,3 +67,9 @@
     </tbody>
 
 </table>
+
+@section Scripts {
+    <script>
+        $('#link-issue').addClass('active');
+    </script>
+}
