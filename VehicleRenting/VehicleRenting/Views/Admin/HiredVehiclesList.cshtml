@@ -1,0 +1,84 @@
+﻿
+
+@{
+    ViewBag.Title = "HiredVehiclesList";
+    var currentlyHiredVehicles = (IEnumerable<VehicleRenting.Models.HiredVehicle>)ViewBag.CurrentlyHiredVehicles;
+}
+
+<header class="title text-left">
+    <h1>
+        Hired Vehicles
+    </h1>
+    <hr />
+</header>
+
+
+@if(currentlyHiredVehicles.Count() == 0)
+{
+    <p class="text-danger">
+        Vehicles that the drivers have hired will be shown here. No vehicle is hired at the moment.
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sr.</th>
+                <th>
+                    Vehicle Registration Number
+                </th>
+                <th>
+                    Hired On
+                </th>
+                <th>
+                    Driver
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{ int count = 0; }
+            @foreach (var item in currentlyHiredVehicles)
+            {
+                <tr>
+                    <td>
+                        @(++count)
+                    </td>
+                    <td>
+                        @item.Vehicle.RegistrationNo
+                    </td>
+                    <td>
+                        @item.HireStartDate
+                    </td>
+                    <td>
+                        @item.Driver.AspNetUser.UserName
+                    </td>
+                    <td>
+                        <a title="Revoke Vehicle" href="@Url.Action("RevokeVehicle", new { id = item.id })">
+                            <span class="fa fa-ban"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="5">
+                    <i style="font-size: 75%">*Only the vehicles that are currently hired by you are shown here.</i>
+                </td>
+            </tr>
+        </tfoot>
+
+    </table>
+}
+
+@section Scripts{
+
+<script>
+    $('#link-hired-vehicles').addClass('active');
+</script>
+
+}

@@ -392,6 +392,9 @@
     <Content Include="Views\Shared\_Admin.cshtml" />
     <Content Include="Views\Driver\RequestVehicle.cshtml" />
     <Content Include="Views\Driver\VehicleRequestsList.cshtml" />
+    <Content Include="Views\Admin\VehicleRequestsList.cshtml" />
+    <Content Include="Views\Driver\HiredVehiclesList.cshtml" />
+    <Content Include="Views\Admin\HiredVehiclesList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

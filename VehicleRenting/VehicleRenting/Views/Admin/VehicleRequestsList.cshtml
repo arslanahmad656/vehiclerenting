@@ -1,0 +1,87 @@
+﻿
+
+@{
+    ViewBag.Title = "VehicleRequestsList";
+    var vehicleRequests = (IEnumerable<VehicleRenting.Models.vehiclerequest>)ViewBag.RequestedVehicles;
+}
+
+<header class="title text-left">
+    <h1>
+        Vehicle Requests
+    </h1>
+    <hr />
+</header>
+
+
+@if (vehicleRequests.Count() == 0)
+{
+    <p class="text-danger">
+        Vehicles that the drivers have requested will appear here. At this time, there is no vehicle request to show or there is not any open vehicle request.
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sr.</th>
+                <th>
+                    Request Date
+                </th>
+                <th>
+                    Vehicle Registration
+                </th>
+                <th>
+                    Driver
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{ int count = 0; }
+            @foreach (var item in vehicleRequests)
+            {
+                <tr>
+                    <td>
+                        @(++count)
+                    </td>
+                    <td>
+                        @item.RequestDate
+                    </td>
+                    <td>
+                        @item.Vehicle.RegistrationNo
+                    </td>
+                    <td>
+                        @item.Driver.AspNetUser.UserName
+                    </td>
+                    <td>
+                        <a title="Approve Request" href="@Url.Action("ApproveVehicleRequest", new { id = item.id })">
+                            <span class="fa fa-check"></span>
+                        </a>&nbsp;
+                        <a title="Decline Request" href="@Url.Action("DeclineVehicleRequest", new { id = item.id })">
+                            <span class="fa-times"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="5">
+                    <i style="font-size: 75%">* Only open/pending requests are shown here</i>
+                </td>
+            </tr>
+        </tfoot>
+
+    </table>
+}
+
+@section Scripts{
+
+<script>
+    $('#link-vehiclerequest').addClass('active');
+</script>
+
+}

@@ -96,5 +96,34 @@ namespace VehicleRenting.App_Start
                 return true;
             }
         }
+
+        public static string GetVehicleHireStatus(bool? status)
+        {
+            if(status == null)
+            {
+                return "NA";
+            }
+            else if(status == true)
+            {
+                return "Hired";
+            }
+            return "Available";
+        }
+
+        public static bool VehicleHired
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public static bool VehicleAvailable
+        {
+            get
+            {
+                return false;   
+            }
+        }
     }
 }

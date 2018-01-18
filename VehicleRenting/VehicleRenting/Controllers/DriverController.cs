@@ -39,6 +39,14 @@ namespace VehicleRenting.Controllers
 
             // end vehicle requests list
 
+
+            // hired vehicles start
+            
+            var currentlyHiredVehicles = db.HiredVehicles.Where(hv => hv.HireEndDate == null && hv.DriverId == loggedInDriverId).ToList();
+            ViewBag.CurrentlyHiredVehicles = currentlyHiredVehicles;
+
+            // hired vehicles end
+
             return View();
         }
 
@@ -213,7 +221,21 @@ namespace VehicleRenting.Controllers
             var loggedInUserId = User.Identity.GetUserId();
             var loggedInDriverId = db.Drivers.Where(d => d.UserId.Equals(loggedInUserId)).First().Id;
             var requestedVehicles = db.vehiclerequests.Where(vr => vr.status == ApplicationWideConstants.VehicleRequestOpen && vr.DriverId == loggedInDriverId).ToList();
-            return View(requestedVehicles);
+            ViewBag.RequestedVehicles = requestedVehicles;
+            return View();
+        }
+
+        #endregion
+
+        #region HiredVehicles
+
+        public ActionResult HiredVehiclesList()
+        {
+            var loggedInUserId = User.Identity.GetUserId();
+            var loggedInDriverId = db.Drivers.Where(d => d.UserId.Equals(loggedInUserId)).First().Id;
+            var currentlyHiredVehicles = db.HiredVehicles.Where(hv => hv.HireEndDate == null && hv.DriverId == loggedInDriverId).ToList();
+            ViewBag.CurrentlyHiredVehicles = currentlyHiredVehicles;
+            return View();
         }
 
         #endregion

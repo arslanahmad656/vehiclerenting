@@ -182,7 +182,6 @@ namespace VehicleRenting.Controllers
 
         #endregion
 
-
         #region Proprietor
 
         public ActionResult ProprietorIndex()
@@ -785,6 +784,107 @@ namespace VehicleRenting.Controllers
                 ModelState.AddModelError("", "Please fill in all the fields properly.");
                 return View(model);
             }
+        }
+
+        #endregion
+
+        #region VehicleRequests
+
+        public ActionResult VehicleRequestsList()
+        {
+            var openVehicleRequests = db.vehiclerequests.Where(vr => vr.status == ApplicationWideConstants.VehicleRequestOpen).ToList();
+            ViewBag.RequestedVehicles = openVehicleRequests;
+            return View();
+        }
+
+        public ActionResult ApproveVehicleRequest(int id) // vehicle request id
+        {
+            var model = db.vehiclerequests.Find(id);
+            if(model == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
+            model.status = ApplicationWideConstants.VehicleRequestClosed;
+            db.Entry(model).State = EntityState.Modified;
+            db.SaveChanges();
+
+            var hiredVehicle = model.Vehicle;
+            hiredVehicle.UnderOffer = ApplicationWideConstants.VehicleHired;
+            db.Entry(hiredVehicle).State = EntityState.Modified;
+            db.SaveChanges();
+
+            CloseVehicleRequestsBasedOnVehicleId(model.VehicleId);
+
+            var hiredVehicleEntry = new HiredVehicle
+            {
+                DriverId = model.DriverId,
+                HireStartDate = DateTime.Now,
+                VehicleId = model.VehicleId,
+                HireEndDate = null
+            };
+            db.HiredVehicles.Add(hiredVehicleEntry);
+            db.SaveChanges();
+
+            return RedirectToAction("VehicleRequestsList");
+        }
+
+        public ActionResult DeclineVehicleRequest(int id)
+        {
+            var model = db.vehiclerequests.Find(id);
+            if (model == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
+            model.status = ApplicationWideConstants.VehicleRequestClosed;
+            db.Entry(model).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("VehicleRequestsList");
+        }
+
+        public void CloseVehicleRequestsBasedOnVehicleId(int vehicleId)
+        {
+            var openRequestsWithGivenVehicleId = db.vehiclerequests.Where(vr => vr.status == ApplicationWideConstants.VehicleRequestOpen && vr.VehicleId == vehicleId).ToList();
+            openRequestsWithGivenVehicleId.ForEach(vr =>
+            {
+                vr.status = ApplicationWideConstants.VehicleRequestClosed;
+                db.Entry(vr).State = EntityState.Modified;
+            });
+            db.SaveChanges();
+        }
+
+        private void CloseVehicleRequestsBasedOnDriverId(int driverId)
+        {
+            var openRequestsWithGivenDriverId = db.vehiclerequests.Where(vr => vr.status == ApplicationWideConstants.VehicleRequestOpen && vr.DriverId == driverId).ToList();
+            openRequestsWithGivenDriverId.ForEach(vr =>
+            {
+                vr.status = ApplicationWideConstants.VehicleRequestClosed;
+                db.Entry(vr).State = EntityState.Modified;
+            });
+            db.SaveChanges();
+        }
+
+        #endregion
+
+        #region HiredVehicles
+
+        public ActionResult HiredVehiclesList()
+        {
+            var currentlyHiredVehicles = db.HiredVehicles.Where(hv => hv.HireEndDate == null).ToList();
+            ViewBag.CurrentlyHiredVehicles = currentlyHiredVehicles;
+            return View();
+        }
+
+        public ActionResult RevokeVehicle(int id) // hired vehicle id
+        {
+            var model = db.HiredVehicles.Find(id);
+            if(model == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
+            model.HireEndDate = DateTime.Now;
+            db.Entry(model).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("HiredVehiclesList");
         }
 
         #endregion
