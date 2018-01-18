@@ -219,8 +219,11 @@
 
     <script>
         $(document).ready(function () {
-            var contentHeight = Number($('.content').css('height').slice(0, -2)) - 85;
-            $('.nav').css('height', contentHeight + 'px');
+            var navHeight = Number($('.nav').css('height').slice(0, -2));
+            var contentHeight = Number($('.content').css('height').slice(0, -2));
+            if (contentHeight > navHeight) {
+                $('.nav').css('height', (contentHeight - 85) + 'px');
+            }
         })
     </script>
 </body>
