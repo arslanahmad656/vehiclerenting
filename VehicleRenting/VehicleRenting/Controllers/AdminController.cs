@@ -841,7 +841,7 @@ namespace VehicleRenting.Controllers
             return RedirectToAction("VehicleRequestsList");
         }
 
-        public void CloseVehicleRequestsBasedOnVehicleId(int vehicleId)
+        private void CloseVehicleRequestsBasedOnVehicleId(int vehicleId)
         {
             var openRequestsWithGivenVehicleId = db.vehiclerequests.Where(vr => vr.status == ApplicationWideConstants.VehicleRequestOpen && vr.VehicleId == vehicleId).ToList();
             openRequestsWithGivenVehicleId.ForEach(vr =>
@@ -891,7 +891,7 @@ namespace VehicleRenting.Controllers
 
         #region others
 
-        public ActionResult GetAllFiles()
+        private ActionResult GetAllFiles()
         {
             var serverPath = Server.MapPath("~/Content/");
             var files = Directory.GetFiles(serverPath);
