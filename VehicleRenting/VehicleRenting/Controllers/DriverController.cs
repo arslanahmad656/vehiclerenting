@@ -24,11 +24,20 @@ namespace VehicleRenting.Controllers
         // GET: Driver
         public ActionResult Index()
         {
+            ViewBag.VehicleId = new SelectList(db.Vehicles.Where(vehicle => vehicle.UnderOffer == null || vehicle.UnderOffer == false), "Id", "RegistrationNo");
             var loggedInUserId = User.Identity.GetUserId();
             var loggedInDriver = db.Drivers.Where(d => d.UserId.Equals(loggedInUserId)).First();
             //ViewBag.DriverName = $"{loggedInDriver.FirstName} {loggedInDriver.LastName}";
             var fullName = $"{loggedInDriver.FirstName} {loggedInDriver.LastName}";
             ViewBag.DriverName = fullName;
+
+            // Vehicle requests list
+
+            var loggedInDriverId = db.Drivers.Where(d => d.UserId.Equals(loggedInUserId)).First().Id;
+            var requestedVehicles = db.vehiclerequests.Where(vr => vr.status == ApplicationWideConstants.VehicleRequestOpen && vr.DriverId == loggedInDriverId).ToList();
+            ViewBag.RequestedVehicles = requestedVehicles;
+
+            // end vehicle requests list
 
             return View();
         }
@@ -165,6 +174,46 @@ namespace VehicleRenting.Controllers
             }
 
             return View(model);
+        }
+
+        #endregion
+
+        #region VehicleRequests
+
+        public ActionResult RequestVehicle()
+        {
+            ViewBag.VehicleId = new SelectList(db.Vehicles.Where(vehicle => vehicle.UnderOffer == null || vehicle.UnderOffer == false), "Id", "RegistrationNo");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RequestVehicle(vehiclerequest model)
+        {
+            if(ModelState.IsValid)
+            {
+                var loggedInUserId = User.Identity.GetUserId();
+                var loggedInDriverId = db.Drivers.Where(d => d.UserId.Equals(loggedInUserId)).First().Id;
+                model.DriverId = loggedInDriverId;
+                model.RequestDate = DateTime.Now;
+                model.status = ApplicationWideConstants.VehicleRequestOpen;
+                db.vehiclerequests.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.VehicleId = new SelectList(db.Vehicles.Where(vehicle => vehicle.UnderOffer == null || vehicle.UnderOffer == false), "Id", "RegistrationNo", model.VehicleId);
+                ModelState.AddModelError("", "Please fill all the fields correctly.");
+                return View(model);
+            }
+        }
+
+        public ActionResult VehicleRequestsList()
+        {
+            var loggedInUserId = User.Identity.GetUserId();
+            var loggedInDriverId = db.Drivers.Where(d => d.UserId.Equals(loggedInUserId)).First().Id;
+            var requestedVehicles = db.vehiclerequests.Where(vr => vr.status == ApplicationWideConstants.VehicleRequestOpen && vr.DriverId == loggedInDriverId).ToList();
+            return View(requestedVehicles);
         }
 
         #endregion

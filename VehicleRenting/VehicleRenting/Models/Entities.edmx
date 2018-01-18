@@ -123,6 +123,16 @@
           <Property Name="SpecialConditions" Type="nvarchar" MaxLength="2048" />
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="HiredVehicles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DriverId" Type="int" Nullable="false" />
+          <Property Name="VehicleId" Type="int" Nullable="false" />
+          <Property Name="HireStartDate" Type="datetime" Nullable="false" />
+          <Property Name="HireEndDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="IdentityTypes">
           <Key>
             <PropertyRef Name="Id" />
@@ -217,6 +227,16 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Code" Type="int" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vehiclerequest">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DriverId" Type="int" Nullable="false" />
+          <Property Name="VehicleId" Type="int" Nullable="false" />
+          <Property Name="RequestDate" Type="datetime" Nullable="false" />
+          <Property Name="status" Type="bit" />
         </EntityType>
         <EntityType Name="Vehicles">
           <Key>
@@ -397,6 +417,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HIREDVEHICLES_DRIVER">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
+          <End Role="HiredVehicles" Type="Self.HiredVehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HiredVehicles">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HIREDVEHICLES_VEHICLE">
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="1" />
+          <End Role="HiredVehicles" Type="Self.HiredVehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HiredVehicles">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Issues_IssueType">
           <End Role="IssueTypes" Type="Self.IssueTypes" Multiplicity="1" />
           <End Role="Issues" Type="Self.Issues" Multiplicity="*" />
@@ -418,6 +462,30 @@
             </Principal>
             <Dependent Role="noticereply">
               <PropertyRef Name="noticeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VEHICLEREQUEST_DRIVER">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
+          <End Role="vehiclerequest" Type="Self.vehiclerequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vehiclerequest">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VEHICLEREQUEST_VEHICLE">
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="1" />
+          <End Role="vehiclerequest" Type="Self.vehiclerequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vehiclerequest">
+              <PropertyRef Name="VehicleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -456,6 +524,7 @@
           <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Drivers" EntityType="Self.Drivers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HiredVehicles" EntityType="Self.HiredVehicles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IdentityTypes" EntityType="Self.IdentityTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Issues" EntityType="Self.Issues" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IssueTypes" EntityType="Self.IssueTypes" Schema="dbo" store:Type="Tables" />
@@ -467,6 +536,7 @@
           <EntitySet Name="Salutations" EntityType="Self.Salutations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SourceTypes" EntityType="Self.SourceTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VehicleConditions" EntityType="Self.VehicleConditions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vehiclerequest" EntityType="Self.vehiclerequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehicles" EntityType="Self.Vehicles" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Issues__DriverId__6383C8BA" Association="Self.FK__Issues__DriverId__6383C8BA">
             <End Role="Drivers" EntitySet="Drivers" />
@@ -520,6 +590,14 @@
             <End Role="SourceTypes" EntitySet="SourceTypes" />
             <End Role="Drivers" EntitySet="Drivers" />
           </AssociationSet>
+          <AssociationSet Name="FK_HIREDVEHICLES_DRIVER" Association="Self.FK_HIREDVEHICLES_DRIVER">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="HiredVehicles" EntitySet="HiredVehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HIREDVEHICLES_VEHICLE" Association="Self.FK_HIREDVEHICLES_VEHICLE">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="HiredVehicles" EntitySet="HiredVehicles" />
+          </AssociationSet>
           <AssociationSet Name="FK_Issues_IssueType" Association="Self.FK_Issues_IssueType">
             <End Role="IssueTypes" EntitySet="IssueTypes" />
             <End Role="Issues" EntitySet="Issues" />
@@ -527,6 +605,14 @@
           <AssociationSet Name="FK_NOTICEREPLY_NOTICE" Association="Self.FK_NOTICEREPLY_NOTICE">
             <End Role="Notices" EntitySet="Notices" />
             <End Role="noticereply" EntitySet="noticereply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VEHICLEREQUEST_DRIVER" Association="Self.FK_VEHICLEREQUEST_DRIVER">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="vehiclerequest" EntitySet="vehiclerequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VEHICLEREQUEST_VEHICLE" Association="Self.FK_VEHICLEREQUEST_VEHICLE">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="vehiclerequest" EntitySet="vehiclerequest" />
           </AssociationSet>
           <AssociationSet Name="FK_Vehicles_Proprietor" Association="Self.FK_Vehicles_Proprietor">
             <End Role="proprietor" EntitySet="proprietor" />
@@ -667,6 +753,20 @@
           <NavigationProperty Name="ReferenceType" Relationship="Self.FK_Drivers_ReferenceType" FromRole="Drivers" ToRole="ReferenceTypes" />
           <NavigationProperty Name="Salutation" Relationship="Self.FK_Drivers_Salutation" FromRole="Drivers" ToRole="Salutations" />
           <NavigationProperty Name="SourceType" Relationship="Self.FK_Drivers_Source" FromRole="Drivers" ToRole="SourceTypes" />
+          <NavigationProperty Name="HiredVehicles" Relationship="Self.FK_HIREDVEHICLES_DRIVER" FromRole="Drivers" ToRole="HiredVehicles" />
+          <NavigationProperty Name="vehiclerequests" Relationship="Self.FK_VEHICLEREQUEST_DRIVER" FromRole="Drivers" ToRole="vehiclerequest" />
+        </EntityType>
+        <EntityType Name="HiredVehicle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DriverId" Type="Int32" Nullable="false" />
+          <Property Name="VehicleId" Type="Int32" Nullable="false" />
+          <Property Name="HireStartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HireEndDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK_HIREDVEHICLES_DRIVER" FromRole="HiredVehicles" ToRole="Drivers" />
+          <NavigationProperty Name="Vehicle" Relationship="Self.FK_HIREDVEHICLES_VEHICLE" FromRole="HiredVehicles" ToRole="Vehicles" />
         </EntityType>
         <EntityType Name="IdentityType">
           <Key>
@@ -776,6 +876,18 @@
           <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Vehicles" Relationship="Self.FK_Vehicles_VehicleCondition" FromRole="VehicleConditions" ToRole="Vehicles" />
         </EntityType>
+        <EntityType Name="vehiclerequest">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DriverId" Type="Int32" Nullable="false" />
+          <Property Name="VehicleId" Type="Int32" Nullable="false" />
+          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK_VEHICLEREQUEST_DRIVER" FromRole="vehiclerequest" ToRole="Drivers" />
+          <NavigationProperty Name="Vehicle" Relationship="Self.FK_VEHICLEREQUEST_VEHICLE" FromRole="vehiclerequest" ToRole="Vehicles" />
+        </EntityType>
         <EntityType Name="Vehicle">
           <Key>
             <PropertyRef Name="Id" />
@@ -791,8 +903,10 @@
           <Property Name="UnderOffer" Type="Boolean" />
           <Property Name="ProprietorId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Contracts" Relationship="Self.FK_Contracts_Vehicle" FromRole="Vehicles" ToRole="Contracts" />
+          <NavigationProperty Name="HiredVehicles" Relationship="Self.FK_HIREDVEHICLES_VEHICLE" FromRole="Vehicles" ToRole="HiredVehicles" />
           <NavigationProperty Name="proprietor" Relationship="Self.FK_Vehicles_Proprietor" FromRole="Vehicles" ToRole="proprietor" />
           <NavigationProperty Name="VehicleCondition" Relationship="Self.FK_Vehicles_VehicleCondition" FromRole="Vehicles" ToRole="VehicleConditions" />
+          <NavigationProperty Name="vehiclerequests" Relationship="Self.FK_VEHICLEREQUEST_VEHICLE" FromRole="Vehicles" ToRole="vehiclerequest" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -930,6 +1044,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HIREDVEHICLES_DRIVER">
+          <End Role="Drivers" Type="Self.Driver" Multiplicity="1" />
+          <End Role="HiredVehicles" Type="Self.HiredVehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HiredVehicles">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VEHICLEREQUEST_DRIVER">
+          <End Role="Drivers" Type="Self.Driver" Multiplicity="1" />
+          <End Role="vehiclerequest" Type="Self.vehiclerequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vehiclerequest">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HIREDVEHICLES_VEHICLE">
+          <End Role="Vehicles" Type="Self.Vehicle" Multiplicity="1" />
+          <End Role="HiredVehicles" Type="Self.HiredVehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HiredVehicles">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Issues_IssueType">
           <End Role="IssueTypes" Type="Self.IssueType" Multiplicity="1" />
           <End Role="Issues" Type="Self.Issue" Multiplicity="*" />
@@ -978,6 +1128,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_VEHICLEREQUEST_VEHICLE">
+          <End Role="Vehicles" Type="Self.Vehicle" Multiplicity="1" />
+          <End Role="vehiclerequest" Type="Self.vehiclerequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vehiclerequest">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -992,6 +1154,7 @@
           <EntitySet Name="Contracts" EntityType="Self.Contract" />
           <EntitySet Name="Documents" EntityType="Self.Document" />
           <EntitySet Name="Drivers" EntityType="Self.Driver" />
+          <EntitySet Name="HiredVehicles" EntityType="Self.HiredVehicle" />
           <EntitySet Name="IdentityTypes" EntityType="Self.IdentityType" />
           <EntitySet Name="Issues" EntityType="Self.Issue" />
           <EntitySet Name="IssueTypes" EntityType="Self.IssueType" />
@@ -1003,6 +1166,7 @@
           <EntitySet Name="Salutations" EntityType="Self.Salutation" />
           <EntitySet Name="SourceTypes" EntityType="Self.SourceType" />
           <EntitySet Name="VehicleConditions" EntityType="Self.VehicleCondition" />
+          <EntitySet Name="vehiclerequests" EntityType="Self.vehiclerequest" />
           <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1048,6 +1212,18 @@
             <End Role="SourceTypes" EntitySet="SourceTypes" />
             <End Role="Drivers" EntitySet="Drivers" />
           </AssociationSet>
+          <AssociationSet Name="FK_HIREDVEHICLES_DRIVER" Association="Self.FK_HIREDVEHICLES_DRIVER">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="HiredVehicles" EntitySet="HiredVehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VEHICLEREQUEST_DRIVER" Association="Self.FK_VEHICLEREQUEST_DRIVER">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="vehiclerequest" EntitySet="vehiclerequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HIREDVEHICLES_VEHICLE" Association="Self.FK_HIREDVEHICLES_VEHICLE">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="HiredVehicles" EntitySet="HiredVehicles" />
+          </AssociationSet>
           <AssociationSet Name="FK_Issues_IssueType" Association="Self.FK_Issues_IssueType">
             <End Role="IssueTypes" EntitySet="IssueTypes" />
             <End Role="Issues" EntitySet="Issues" />
@@ -1063,6 +1239,10 @@
           <AssociationSet Name="FK_Vehicles_VehicleCondition" Association="Self.FK_Vehicles_VehicleCondition">
             <End Role="VehicleConditions" EntitySet="VehicleConditions" />
             <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VEHICLEREQUEST_VEHICLE" Association="Self.FK_VEHICLEREQUEST_VEHICLE">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="vehiclerequest" EntitySet="vehiclerequests" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -1191,6 +1371,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="HiredVehicles">
+            <EntityTypeMapping TypeName="Model.HiredVehicle">
+              <MappingFragment StoreEntitySet="HiredVehicles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="HireStartDate" ColumnName="HireStartDate" />
+                <ScalarProperty Name="HireEndDate" ColumnName="HireEndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="IdentityTypes">
             <EntityTypeMapping TypeName="Model.IdentityType">
               <MappingFragment StoreEntitySet="IdentityTypes">
@@ -1294,6 +1485,17 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vehiclerequests">
+            <EntityTypeMapping TypeName="Model.vehiclerequest">
+              <MappingFragment StoreEntitySet="vehiclerequest">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

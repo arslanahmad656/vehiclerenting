@@ -19,6 +19,8 @@ namespace VehicleRenting.Models
         {
             this.Issues = new HashSet<Issue>();
             this.Notices = new HashSet<Notice>();
+            this.HiredVehicles = new HashSet<HiredVehicle>();
+            this.vehiclerequests = new HashSet<vehiclerequest>();
         }
     
         public int SalutationId { get; set; }
@@ -53,5 +55,9 @@ namespace VehicleRenting.Models
         public virtual ReferenceType ReferenceType { get; set; }
         public virtual Salutation Salutation { get; set; }
         public virtual SourceType SourceType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HiredVehicle> HiredVehicles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<vehiclerequest> vehiclerequests { get; set; }
     }
 }

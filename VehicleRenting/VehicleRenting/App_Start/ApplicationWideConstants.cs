@@ -67,5 +67,34 @@ namespace VehicleRenting.App_Start
                 return true;
             }
         }
+
+        public static string GetVehicleRequestStatus(bool? status)
+        {
+            if(status == null)
+            {
+                return "NA";
+            }
+            if(status == true)
+            {
+                return "Closed";
+            }
+            return "Open/Pending";
+        }
+
+        public static bool VehicleRequestOpen
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public static bool VehicleRequestClosed
+        {
+            get
+            {
+                return true;
+            }
+        }
     }
 }

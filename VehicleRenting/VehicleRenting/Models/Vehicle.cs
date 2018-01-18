@@ -18,6 +18,8 @@ namespace VehicleRenting.Models
         public Vehicle()
         {
             this.Contracts = new HashSet<Contract>();
+            this.HiredVehicles = new HashSet<HiredVehicle>();
+            this.vehiclerequests = new HashSet<vehiclerequest>();
         }
     
         public int Id { get; set; }
@@ -33,7 +35,11 @@ namespace VehicleRenting.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contract> Contracts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HiredVehicle> HiredVehicles { get; set; }
         public virtual proprietor proprietor { get; set; }
         public virtual VehicleCondition VehicleCondition { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<vehiclerequest> vehiclerequests { get; set; }
     }
 }

@@ -34,6 +34,7 @@ namespace VehicleRenting.Models
         public virtual DbSet<Contract> Contracts { get; set; }
         public virtual DbSet<Document> Documents { get; set; }
         public virtual DbSet<Driver> Drivers { get; set; }
+        public virtual DbSet<HiredVehicle> HiredVehicles { get; set; }
         public virtual DbSet<IdentityType> IdentityTypes { get; set; }
         public virtual DbSet<Issue> Issues { get; set; }
         public virtual DbSet<IssueType> IssueTypes { get; set; }
@@ -45,6 +46,7 @@ namespace VehicleRenting.Models
         public virtual DbSet<Salutation> Salutations { get; set; }
         public virtual DbSet<SourceType> SourceTypes { get; set; }
         public virtual DbSet<VehicleCondition> VehicleConditions { get; set; }
+        public virtual DbSet<vehiclerequest> vehiclerequests { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
     }
 }

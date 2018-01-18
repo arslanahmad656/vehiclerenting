@@ -1,0 +1,57 @@
+﻿
+
+@{
+    ViewBag.Title = "VehicleRequestsList";
+    var vehicleRequests = (IEnumerable<VehicleRenting.Models.vehiclerequest>)ViewBag.RequestedVehicles;
+}
+
+
+@if (vehicleRequests.Count() == 0)
+{
+    <p class="text-danger">
+        Vehicles that you have requested will appear here. You haven't requested for a vehicle yet.
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sr.</th>
+                <th>
+                    Request Date
+                </th>
+                <th>
+                    Vehicle Registration
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{ int count = 0; }
+            @foreach (var item in vehicleRequests)
+            {
+                <tr>
+                    <td>
+                        @(++count)
+                    </td>
+                    <td>
+                        @item.RequestDate
+                    </td>
+                    <td>
+                        @item.Vehicle.RegistrationNo
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    <i style="font-size: 75%">* Only open/pending requests are shown here</i>
+                </td>
+            </tr>
+        </tfoot>
+
+    </table>
+}
