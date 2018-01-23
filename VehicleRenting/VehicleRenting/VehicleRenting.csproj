@@ -395,6 +395,8 @@
     <Content Include="Views\Admin\VehicleRequestsList.cshtml" />
     <Content Include="Views\Driver\HiredVehiclesList.cshtml" />
     <Content Include="Views\Admin\HiredVehiclesList.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\BookAppointment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

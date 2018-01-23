@@ -1,0 +1,68 @@
+﻿@model IEnumerable<VehicleRenting.Models.Vehicle>
+
+@{
+    ViewBag.Title = "VehicleIndex";
+}
+
+<header class="title text-left">
+    <h1>Search Results</h1>
+    <hr />
+</header>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Sr.
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VehicleColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RentPerWeek)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AvailableDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.proprietor.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@{ int count = 0; }
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @(++count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegistrationNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VehicleColor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RentPerWeek)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailableDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.proprietor.Name)
+        </td>
+        <td>
+            <a title="Book Appointment" href="@Url.Action("BookAppointment", new { vehicleId = item.Id })">
+                Hire
+            </a>
+        </td>
+    </tr>
+}
+    </tbody>
+
+</table>

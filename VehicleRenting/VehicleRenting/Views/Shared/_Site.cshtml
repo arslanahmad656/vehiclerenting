@@ -50,6 +50,27 @@
                 padding: 0.85em 2em;
             }
 
+            .search-bar {
+                margin-top: 20px;
+                margin-right: 200px;
+                font-family: Calibri sans-serif;
+            }
+
+            .search-bar .search input,
+                .search-bar .search select {
+                display: inline-block;
+                padding: 1em 1.5em;
+                font-size: 14px;
+                background-color: transparent;
+                border: none;
+                border: 1px solid black;
+            }
+
+            .search-bar .search input:focus,
+                .search-bar .search select:focus {
+                border: none;
+            }
+
         </style>
     </head>
     <body>
@@ -78,7 +99,7 @@
                     </ul>
                 </nav>
             </div>
-            <div class="nav-container nav-sub-container">
+            @*<div class="nav-container nav-sub-container">
                 <nav class="nav-sub">
                     <ul>
                         <li>
@@ -101,6 +122,28 @@
                         </li>
                     </ul>
                 </nav>
+            </div>*@
+            <div class="search-bar">
+                <form style="display: none;" id="form-search"></form>
+
+                <div class="search">
+                    <input name="vehiclecolor" form="form-search" placeholder="Vehicle Color" />
+                    <select name="availabletodouble" form="form-search">
+                        <option value>Not Applicable</option>
+                        <option value="true" selected>Available to Double</option>
+                        <option value="false">Not Available to Double</option>
+                    </select>
+                    <select name="rentperweek" form="form-search">
+                        <option value>Not Applicable</option>
+                        <option value="1">$0 - $100</option>
+                        <option value="2">$101 - $200</option>
+                        <option value="3">$201 - $500</option>
+                        <option value="4">$501 - $1000</option>
+                        <option value="5">$1000 - $2000</option>
+                        <option value="6">$2001 - </option>
+                    </select>
+                    <input type="submit" value="Search" form="form-search" />
+                </div>
             </div>
         </header>
 

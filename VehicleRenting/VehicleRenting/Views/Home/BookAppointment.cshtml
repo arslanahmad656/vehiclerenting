@@ -1,0 +1,104 @@
+﻿@model VehicleRenting.Models.Appointment
+
+@{
+    ViewBag.Title = "BookAppointment";
+}
+
+<header class="title text-left">
+    <h1>
+        Report your issue here
+    </h1>
+    <hr />
+</header>
+
+
+@using (Html.BeginForm("BookAppointment", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    @Html.HiddenFor(model => model.Id)
+    <br />
+    @Html.Hidden("Date", DateTime.Now)
+    <br />
+    @Html.Hidden("vehicleId", (int)ViewBag.VehicleId)
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <br />
+    <div>
+        <p>
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+        </p>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.Name, "IssueTypeId", htmlAttributes: new { @class = "" })
+        </div>
+        @*<div class="input-box">
+            @Html.DropDownList("IssueTypeId", null, htmlAttributes: new { @class = "form-control" })
+        </div>*@
+        <div class="input-box">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box" style="vertical-align: top">
+            @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="input-box">
+            @Html.TextAreaFor(model => model.Comments, new { @class = "", rows = 7 })
+            <textarea name="Comments" id="Comments" rows="7">
+                @((string)ViewBag.Comments)
+            </textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-box">
+            &nbsp;
+        </div>
+        <div class="input-box">
+            <input type="submit" value="Send Enquiry" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
