@@ -39,11 +39,15 @@ namespace VehicleRenting.Controllers
             return View();
         }
 
-        public ActionResult Search()
+        public ActionResult Search(string vehiclecolor, string availabletodouble, string rentperweek)
         {
-            var vehicleColorParam = Request.Form["vehiclecolor"];
-            var availableToDoubleParam = Request.Form["availabletodouble"];
-            var priceRangeParam = Request.Form["rentperweek"];
+            //var vehicleColorParam = Request.Form["vehiclecolor"];
+            //var availableToDoubleParam = Request.Form["availabletodouble"];
+            //var priceRangeParam = Request.Form["rentperweek"];
+
+            var vehicleColorParam = vehiclecolor;
+            var availableToDoubleParam = availabletodouble;
+            var priceRangeParam = rentperweek;
 
             var vehicles = db.Vehicles.Where(v => true);
             if (!string.IsNullOrWhiteSpace(vehicleColorParam))
@@ -114,6 +118,7 @@ namespace VehicleRenting.Controllers
             {
                 ModelState.AddModelError("", "Please fill in all the fields properly.");
                 var vehicleId = Convert.ToInt32((Request.Form["vehicleId"]));
+                ViewBag.VehicleId = vehicleId;
                 var vehicle = db.Vehicles.Find(vehicleId);
                 var comments = $"I am interested in vehicle with registration number ${vehicle.RegistrationNo}, {vehicle.VehicleColor} color.";
                 ViewBag.Comments = comments;

@@ -6,7 +6,7 @@
 
 <header class="title text-left">
     <h1>
-        Report your issue here
+        Send vehicle hire enquiry
     </h1>
     <hr />
 </header>
@@ -16,7 +16,7 @@
 {
     @Html.AntiForgeryToken()
     <br />
-    @Html.HiddenFor(model => model.Id)
+    @*@Html.HiddenFor(model => model.Id)*@
     <br />
     @Html.Hidden("Date", DateTime.Now)
     <br />
@@ -45,7 +45,7 @@
 
     <div class="form-group">
         <div class="label-box">
-            @Html.LabelFor(model => model.Name, "IssueTypeId", htmlAttributes: new { @class = "" })
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "" })
         </div>
         @*<div class="input-box">
             @Html.DropDownList("IssueTypeId", null, htmlAttributes: new { @class = "form-control" })
@@ -78,10 +78,8 @@
             @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "" })
         </div>
         <div class="input-box">
-            @Html.TextAreaFor(model => model.Comments, new { @class = "", rows = 7 })
-            <textarea name="Comments" id="Comments" rows="7">
-                @((string)ViewBag.Comments)
-            </textarea>
+            @*@Html.TextAreaFor(model => model.Comments, new { @class = "", rows = 7 })*@
+            <textarea name="Comments" id="Comments" rows="7">@(((string)ViewBag.Comments).Trim())</textarea>
         </div>
     </div>
 

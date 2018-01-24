@@ -68,7 +68,7 @@
 
             .search-bar .search input:focus,
                 .search-bar .search select:focus {
-                border: none;
+                border: 1px solid #555;
             }
 
         </style>
@@ -124,7 +124,7 @@
                 </nav>
             </div>*@
             <div class="search-bar">
-                <form style="display: none;" id="form-search"></form>
+                <form method="get" action="@Url.Action("Search")" style="display: none;" id="form-search"></form>
 
                 <div class="search">
                     <input name="vehiclecolor" form="form-search" placeholder="Vehicle Color" />
