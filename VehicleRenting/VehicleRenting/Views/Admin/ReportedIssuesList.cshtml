@@ -51,7 +51,7 @@
                     @(item.reportdate)
                 </td>
                 <td>
-                    @(VehicleRenting.App_Start.ApplicationWideConstants.GetIssueStatus(item.status))
+                    @(VehicleRenting.App_Start.ApplicationWideConstants.GetIssueStatusString(item.status))
                 </td>
                 <td>
                     @item.Driver.AspNetUser.UserName
