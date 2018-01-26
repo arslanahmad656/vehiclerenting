@@ -43,29 +43,29 @@
             @Html.DisplayFor(model => model.RentPerWeek)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.Active)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Active)
-        </dd>
+        </dd>*@
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.AvailableDate)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.AvailableDate)
-        </dd>
+        </dd>*@
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.UnderOffer)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.UnderOffer)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.proprietor.Name)
@@ -81,6 +81,30 @@
 
         <dd>
             @Html.DisplayFor(model => model.VehicleCondition.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleMake)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleMake)
+        </dd>
+
+        <dt>
+            Vehicle Type
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleType.Title)
+        </dd>
+
+        <dt>
+            Is Livery
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsLivery)
         </dd>
 
     </dl>

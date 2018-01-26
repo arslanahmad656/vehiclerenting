@@ -303,6 +303,7 @@ namespace VehicleRenting.Controllers
             }
             ViewBag.ProprietorId = new SelectList(db.proprietors, "Id", "Name", model.ProprietorId);
             ViewBag.VehicleConditionId = new SelectList(db.VehicleConditions, "Id", "Title", model.VehicleConditionId);
+            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Title", model.VehicleTypeId);
             return View(model);
         }
 
@@ -319,6 +320,7 @@ namespace VehicleRenting.Controllers
             {
                 ViewBag.ProprietorId = new SelectList(db.proprietors, "Id", "Name", model.ProprietorId);
                 ViewBag.VehicleConditionId = new SelectList(db.VehicleConditions, "Id", "Title", model.VehicleConditionId);
+                ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Title", model.VehicleTypeId);
                 ModelState.AddModelError("", "Please fill in all the fields properly.");
                 return View(model);
             }
@@ -333,6 +335,7 @@ namespace VehicleRenting.Controllers
             }
             ViewBag.ProprietorId = new SelectList(db.proprietors, "Id", "Name", model.ProprietorId);
             ViewBag.VehicleConditionId = new SelectList(db.VehicleConditions, "Id", "Title", model.VehicleConditionId);
+            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Title", model.VehicleTypeId);
             return View(model);
         }
 
