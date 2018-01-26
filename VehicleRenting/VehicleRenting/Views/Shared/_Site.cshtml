@@ -1,4 +1,7 @@
-﻿<!DOCTYPE HTML>
+﻿@using VehicleRenting.Models
+@using VehicleRenting.App_Start
+
+<!DOCTYPE HTML>
 
 <html>
     <head>
@@ -125,22 +128,37 @@
             </div>*@
             <div class="search-bar">
                 <form method="get" action="@Url.Action("Search")" style="display: none;" id="form-search"></form>
+                
+                @{ 
+                    var db = new Entities();
+                    var vehicleTypes = db.VehicleTypes.Select(vt => new
+                    {
+                        Id = vt.Id,
+                        Title = vt.Title
+                    }).ToList();
+                }
 
                 <div class="search">
-                    <input name="vehiclecolor" form="form-search" placeholder="Vehicle Color" />
-                    <select name="availabletodouble" form="form-search">
-                        <option value>Not Applicable</option>
-                        <option value="true" selected>Available to Double</option>
-                        <option value="false">Not Available to Double</option>
+                    <input name="vehiclemake" form="form-search" placeholder="Vehicle Make" />
+                    <select name="vehicletype" form="form-search">
+                        <option value selected>All Types</option>
+                        @foreach (var vehicletype in vehicleTypes)
+                        {
+                            <option value="@vehicletype.Id">@vehicletype.Title</option>
+                        }
+                    </select>
+                    <select name="liverytype" form="form-search">
+                        <option value selected>Both</option>
+                        <option value="@ApplicationWideConstants.GetLiveryInt(ApplicationWideConstants.Livery)">@ApplicationWideConstants.GetLiveryString(ApplicationWideConstants.Livery)</option>
+                        <option value="@ApplicationWideConstants.GetLiveryInt(ApplicationWideConstants.NonLivery)">@ApplicationWideConstants.GetLiveryString(ApplicationWideConstants.NonLivery)</option>
                     </select>
                     <select name="rentperweek" form="form-search">
-                        <option value>Not Applicable</option>
-                        <option value="1">$0 - $100</option>
-                        <option value="2">$101 - $200</option>
-                        <option value="3">$201 - $500</option>
-                        <option value="4">$501 - $1000</option>
-                        <option value="5">$1000 - $2000</option>
-                        <option value="6">$2001 - </option>
+                        <option value>All Prices</option>
+                        <option value="1">$0 - $200</option>
+                        <option value="2">$200 - $500</option>
+                        <option value="3">$500 - $800</option>
+                        <option value="4">$800 - $1600</option>
+                        <option value="5">$1600 - </option>
                     </select>
                     <input type="submit" value="Search" form="form-search" />
                 </div>

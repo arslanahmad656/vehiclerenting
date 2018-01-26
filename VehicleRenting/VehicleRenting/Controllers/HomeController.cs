@@ -39,27 +39,34 @@ namespace VehicleRenting.Controllers
             return View();
         }
 
-        public ActionResult Search(string vehiclecolor, string availabletodouble, string rentperweek)
+        public ActionResult Search(string vehiclemake, string vehicletype, string liverytype, string rentperweek)
         {
             //var vehicleColorParam = Request.Form["vehiclecolor"];
             //var availableToDoubleParam = Request.Form["availabletodouble"];
             //var priceRangeParam = Request.Form["rentperweek"];
 
-            var vehicleColorParam = vehiclecolor;
-            var availableToDoubleParam = availabletodouble;
+            
             var priceRangeParam = rentperweek;
 
             var vehicles = db.Vehicles.Where(v => true);
-            if (!string.IsNullOrWhiteSpace(vehicleColorParam))
+
+            if (!string.IsNullOrWhiteSpace(vehiclemake))
             {
-                vehicleColorParam = vehicleColorParam.ToLower();
-                vehicles = vehicles.Where(v => v.VehicleColor.ToLower().Contains(vehicleColorParam));
+                vehiclemake = vehiclemake.ToLower();
+                vehicles = vehicles.Where(v => v.VehicleMake.ToLower().Contains(vehiclemake));
             }
 
-            if (!string.IsNullOrWhiteSpace(availableToDoubleParam))
+            if (!string.IsNullOrWhiteSpace(vehicletype))
             {
-                var availableToDouble = availableToDoubleParam.Equals("true", StringComparison.OrdinalIgnoreCase) ? true : false;
-                vehicles = vehicles.Where(v => v.AvailableToDouble == availableToDouble);
+                var vehicleTypeId = Convert.ToInt32(vehicletype);
+                vehicles = vehicles.Where(v => v.VehicleTypeId == vehicleTypeId);
+            }
+
+            if(!string.IsNullOrWhiteSpace(liverytype))
+            {
+                var liveryInt = Convert.ToInt32(liverytype);
+                var liveryBool = liveryInt == 1 ? true : false;
+                vehicles = vehicles.Where(v => v.IsLivery == liveryBool);
             }
 
             if (!string.IsNullOrWhiteSpace(priceRangeParam))
@@ -68,25 +75,21 @@ namespace VehicleRenting.Controllers
                 switch (priceCategory)
                 {
                     case 1:
-                        vehicles = vehicles.Where(v => v.RentPerWeek >= 0M && v.RentPerWeek <= 100M);
+                        vehicles = vehicles.Where(v => v.RentPerWeek >= 0M && v.RentPerWeek <= 200M);
                         break;
                     case 2:
-                        vehicles = vehicles.Where(v => v.RentPerWeek <= 200M);
-                        break;
-                    case 3:
                         vehicles = vehicles.Where(v => v.RentPerWeek <= 500M);
                         break;
+                    case 3:
+                        vehicles = vehicles.Where(v => v.RentPerWeek <= 800M);
+                        break;
                     case 4:
-                        vehicles = vehicles.Where(v => v.RentPerWeek <= 1000M);
+                        vehicles = vehicles.Where(v => v.RentPerWeek <= 1600M);
                         break;
                     case 5:
-                        vehicles = vehicles.Where(v => v.RentPerWeek <= 2000M);
-                        break;
-                    case 6:
-                        vehicles = vehicles.Where(v => v.RentPerWeek > 2000M);
+                        vehicles = vehicles.Where(v => v.RentPerWeek > 1600M);
                         break;
                     default:
-                        vehicles = vehicles.Where(v => true);
                         break;
                 }
             }

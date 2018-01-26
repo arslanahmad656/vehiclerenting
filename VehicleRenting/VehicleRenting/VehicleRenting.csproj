@@ -400,6 +400,10 @@
     <Content Include="Views\Admin\HiredVehiclesList.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\BookAppointment.cshtml" />
+    <Content Include="Views\Admin\CreateVehicleType.cshtml" />
+    <Content Include="Views\Admin\EditVehicleType.cshtml" />
+    <Content Include="Views\Admin\VehicleTypeDetails.cshtml" />
+    <Content Include="Views\Admin\VehicleTypeIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

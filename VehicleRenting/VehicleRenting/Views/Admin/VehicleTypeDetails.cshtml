@@ -1,0 +1,32 @@
+﻿@model VehicleRenting.Models.VehicleType
+
+@{
+    ViewBag.Title = "Vehicle Details";
+}
+
+<header class="title text-left">
+    <h1>Vehicle Type Details</h1>
+    <hr />
+</header>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <span class="fa fa-arrow-circle-left"></span><a href="@Url.Action("VehicleTypeIndex")">Back to List</a>
+</p>
+
+@section Scripts{
+    <script>
+        $('#link-vehicletype').addClass('active');
+    </script>
+}

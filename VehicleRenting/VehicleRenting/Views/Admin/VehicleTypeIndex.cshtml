@@ -1,0 +1,71 @@
+﻿@model IEnumerable<VehicleRenting.Models.VehicleType>
+
+@{
+    ViewBag.Title = "Vehicle Types";
+}
+
+<header class="title text-left">
+    <h1>Vehicle Types</h1>
+    <hr />
+</header>
+
+<p>
+    @Html.ActionLink("Create New", "CreateVehicleType")
+</p>
+@if (Model.Count() == 0)
+{
+    <h3 title="Create new proprietor by clicking 'Create New'" class="text-danger">Sorry! There are currently no Vehicles available.</h3>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sr.</th>
+                <th>
+                    Title
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int count = 0; }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @(++count)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        <a title="Edit Details" href="@Url.Action("EditVehicleType", new { id = item.Id })">
+                            <span class="fa fa-pencil-square-o"></span>
+                        </a>
+
+                        <a title="View Details" href="@Url.Action("VehicleTypeDetails", new { id = item.Id })">
+                            <span class="fa fa-file-text-o"></span>
+                        </a>
+
+                        <a title="Delete" href="@Url.Action("DeleteVehicleType", new { id = item.Id })">
+                            <span class="fa fa fa-trash-o"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+                }
+@section Scripts{
+    <script>
+        $('.content > *').each(function () {
+            $(this)
+                .css('padding-left', '8px')
+                .css('padding-right', '8px');
+        });
+
+        $('#link-vehicletype').addClass('active');
+    </script>
+}

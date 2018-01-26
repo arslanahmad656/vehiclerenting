@@ -896,6 +896,81 @@ namespace VehicleRenting.Controllers
 
         #endregion
 
+        #region VehicleTypes
+
+        public ActionResult VehicleTypeIndex()
+        {
+            return View(db.VehicleTypes.AsEnumerable());
+        }
+
+        public ActionResult CreateVehicleType()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateVehicleType(VehicleType model)
+        {
+            if(ModelState.IsValid)
+            {
+                db.VehicleTypes.Add(model);
+                db.SaveChanges();
+                return View("VehicleTypeIndex");
+            }
+            ModelState.AddModelError("", "Please fill in all the fields correctly.");
+            return View(model);
+        }
+
+        public ActionResult EditVehicleType(int id)
+        {
+            var model = db.VehicleTypes.Find(id);
+            if (model == null)
+            {
+                return new HttpNotFoundResult("No vehicle type found with the specified ID.");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditVehicleType(VehicleType model)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(model).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("VehicleTypeIndex");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Please fill in all the fields properly.");
+                return View(model);
+            }
+        }
+
+        public ActionResult VehicleTypeDetails(int id)
+        {
+            var model = db.VehicleTypes.Find(id);
+            if (model == null)
+            {
+                return new HttpNotFoundResult("No vehicle type found with the specified ID.");
+            }
+            return View(model);
+        }
+
+        public ActionResult DeleteVehicleType(int id)
+        {
+            var model = db.VehicleTypes.Find(id);
+            if (model == null)
+            {
+                return new HttpNotFoundResult("No vehicle type found with the specified ID.");
+            }
+            db.Entry(model).State = EntityState.Deleted;
+            db.SaveChanges();
+            return RedirectToAction("VehicleTypeIndex");
+        }
+
+        #endregion
+
         #region others
 
         private ActionResult GetAllFiles()

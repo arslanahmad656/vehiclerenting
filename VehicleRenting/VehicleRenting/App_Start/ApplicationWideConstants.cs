@@ -39,7 +39,7 @@ namespace VehicleRenting.App_Start
             }
         }
 
-        public static string GetIssueStatus(bool? status)
+        public static string GetIssueStatusString(bool? status)
         {
             if(status == null)
             {
@@ -68,7 +68,7 @@ namespace VehicleRenting.App_Start
             }
         }
 
-        public static string GetVehicleRequestStatus(bool? status)
+        public static string GetVehicleRequestStatusString(bool? status)
         {
             if(status == null)
             {
@@ -97,7 +97,7 @@ namespace VehicleRenting.App_Start
             }
         }
 
-        public static string GetVehicleHireStatus(bool? status)
+        public static string GetVehicleHireStatusString(bool? status)
         {
             if(status == null)
             {
@@ -123,6 +123,48 @@ namespace VehicleRenting.App_Start
             get
             {
                 return false;   
+            }
+        }
+
+        public static string GetLiveryString(bool? status)
+        {
+            if(status == null)
+            {
+                return "NA";
+            }
+            else if(status == true)
+            {
+                return "Livery";
+            }
+            return "Non Livery";
+        }
+
+        public static int? GetLiveryInt(bool? status)
+        {
+            if (status == null)
+            {
+                return null;
+            }
+            else if (status == true)
+            {
+                return 1;
+            }
+            return 0;
+        }
+
+        public static bool Livery
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public static bool NonLivery
+        {
+            get
+            {
+                return false;
             }
         }
     }
