@@ -50,7 +50,7 @@
                     @(item.reportdate)
                 </td>
                 <td>
-                    @(ApplicationWideConstants.GetIssueStatus(item.status))
+                    @(ApplicationWideConstants.GetIssueStatusString(item.status))
                 </td>
                 <td>
                     @Html.ActionLink("Details", "IssueDetails", new { id = item.Id })

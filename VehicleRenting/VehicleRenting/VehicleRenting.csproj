@@ -312,6 +312,7 @@
       <DependentUpon>Entities.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\desktop.pubxml" />
+    <None Include="Properties\PublishProfiles\precompile desktop.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
