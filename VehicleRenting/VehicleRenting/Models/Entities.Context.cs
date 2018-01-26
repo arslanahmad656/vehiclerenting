@@ -48,5 +48,6 @@ namespace VehicleRenting.Models
         public virtual DbSet<VehicleCondition> VehicleConditions { get; set; }
         public virtual DbSet<vehiclerequest> vehiclerequests { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
+        public virtual DbSet<VehicleType> VehicleTypes { get; set; }
     }
 }

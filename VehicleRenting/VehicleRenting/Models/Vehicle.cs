@@ -32,6 +32,9 @@ namespace VehicleRenting.Models
         public Nullable<System.DateTime> AvailableDate { get; set; }
         public Nullable<bool> UnderOffer { get; set; }
         public int ProprietorId { get; set; }
+        public Nullable<int> VehicleTypeId { get; set; }
+        public string VehicleMake { get; set; }
+        public Nullable<bool> IsLivery { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contract> Contracts { get; set; }
@@ -41,5 +44,6 @@ namespace VehicleRenting.Models
         public virtual VehicleCondition VehicleCondition { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<vehiclerequest> vehiclerequests { get; set; }
+        public virtual VehicleType VehicleType { get; set; }
     }
 }

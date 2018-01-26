@@ -271,6 +271,7 @@ namespace VehicleRenting.Controllers
         {
             ViewBag.ProprietorId = new SelectList(db.proprietors, "Id", "Name");
             ViewBag.VehicleConditionId = new SelectList(db.VehicleConditions, "Id", "Title");
+            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Title");
             return View();
         }
 
@@ -287,6 +288,7 @@ namespace VehicleRenting.Controllers
             {
                 ViewBag.ProprietorId = new SelectList(db.proprietors, "Id", "Name", model.ProprietorId);
                 ViewBag.VehicleConditionId = new SelectList(db.VehicleConditions, "Id", "Title", model.VehicleConditionId);
+                ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Title", model.VehicleTypeId);
                 ModelState.AddModelError("", "Please fill in all the fields properly.");
                 return View(model);
             }
@@ -882,6 +884,8 @@ namespace VehicleRenting.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
             model.HireEndDate = DateTime.Now;
+            model.Vehicle.UnderOffer = ApplicationWideConstants.VehicleAvailable;
+            db.Entry(model.Vehicle).State = EntityState.Modified;
             db.Entry(model).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("HiredVehiclesList");

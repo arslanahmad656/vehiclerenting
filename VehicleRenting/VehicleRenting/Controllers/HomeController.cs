@@ -120,7 +120,7 @@ namespace VehicleRenting.Controllers
                 var vehicleId = Convert.ToInt32((Request.Form["vehicleId"]));
                 ViewBag.VehicleId = vehicleId;
                 var vehicle = db.Vehicles.Find(vehicleId);
-                var comments = $"I am interested in vehicle with registration number ${vehicle.RegistrationNo}, {vehicle.VehicleColor} color.";
+                var comments = $"I am interested in vehicle with registration number {vehicle.RegistrationNo}, {vehicle.VehicleColor} color.";
                 ViewBag.Comments = comments;
 
                 return View(model);

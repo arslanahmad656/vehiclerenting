@@ -252,6 +252,16 @@
           <Property Name="AvailableDate" Type="datetime" />
           <Property Name="UnderOffer" Type="bit" />
           <Property Name="ProprietorId" Type="int" Nullable="false" />
+          <Property Name="VehicleTypeId" Type="int" />
+          <Property Name="VehicleMake" Type="varchar" MaxLength="128" />
+          <Property Name="IsLivery" Type="bit" />
+        </EntityType>
+        <EntityType Name="VehicleTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <Association Name="FK__Issues__DriverId__6383C8BA">
           <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
@@ -513,6 +523,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Vehicles_VehicleType">
+          <End Role="VehicleTypes" Type="Self.VehicleTypes" Multiplicity="0..1" />
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="VehicleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
@@ -538,6 +560,7 @@
           <EntitySet Name="VehicleConditions" EntityType="Self.VehicleConditions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vehiclerequest" EntityType="Self.vehiclerequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehicles" EntityType="Self.Vehicles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleTypes" EntityType="Self.VehicleTypes" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Issues__DriverId__6383C8BA" Association="Self.FK__Issues__DriverId__6383C8BA">
             <End Role="Drivers" EntitySet="Drivers" />
             <End Role="Issues" EntitySet="Issues" />
@@ -620,6 +643,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Vehicles_VehicleCondition" Association="Self.FK_Vehicles_VehicleCondition">
             <End Role="VehicleConditions" EntitySet="VehicleConditions" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicles_VehicleType" Association="Self.FK_Vehicles_VehicleType">
+            <End Role="VehicleTypes" EntitySet="VehicleTypes" />
             <End Role="Vehicles" EntitySet="Vehicles" />
           </AssociationSet>
         </EntityContainer>
@@ -902,11 +929,23 @@
           <Property Name="AvailableDate" Type="DateTime" Precision="3" />
           <Property Name="UnderOffer" Type="Boolean" />
           <Property Name="ProprietorId" Type="Int32" Nullable="false" />
+          <Property Name="VehicleTypeId" Type="Int32" />
+          <Property Name="VehicleMake" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="IsLivery" Type="Boolean" />
           <NavigationProperty Name="Contracts" Relationship="Self.FK_Contracts_Vehicle" FromRole="Vehicles" ToRole="Contracts" />
           <NavigationProperty Name="HiredVehicles" Relationship="Self.FK_HIREDVEHICLES_VEHICLE" FromRole="Vehicles" ToRole="HiredVehicles" />
           <NavigationProperty Name="proprietor" Relationship="Self.FK_Vehicles_Proprietor" FromRole="Vehicles" ToRole="proprietor" />
           <NavigationProperty Name="VehicleCondition" Relationship="Self.FK_Vehicles_VehicleCondition" FromRole="Vehicles" ToRole="VehicleConditions" />
           <NavigationProperty Name="vehiclerequests" Relationship="Self.FK_VEHICLEREQUEST_VEHICLE" FromRole="Vehicles" ToRole="vehiclerequest" />
+          <NavigationProperty Name="VehicleType" Relationship="Self.FK_Vehicles_VehicleType" FromRole="Vehicles" ToRole="VehicleTypes" />
+        </EntityType>
+        <EntityType Name="VehicleType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Vehicles" Relationship="Self.FK_Vehicles_VehicleType" FromRole="VehicleTypes" ToRole="Vehicles" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -1140,6 +1179,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Vehicles_VehicleType">
+          <End Role="VehicleTypes" Type="Self.VehicleType" Multiplicity="0..1" />
+          <End Role="Vehicles" Type="Self.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="VehicleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -1168,6 +1219,7 @@
           <EntitySet Name="VehicleConditions" EntityType="Self.VehicleCondition" />
           <EntitySet Name="vehiclerequests" EntityType="Self.vehiclerequest" />
           <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
+          <EntitySet Name="VehicleTypes" EntityType="Self.VehicleType" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -1243,6 +1295,10 @@
           <AssociationSet Name="FK_VEHICLEREQUEST_VEHICLE" Association="Self.FK_VEHICLEREQUEST_VEHICLE">
             <End Role="Vehicles" EntitySet="Vehicles" />
             <End Role="vehiclerequest" EntitySet="vehiclerequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicles_VehicleType" Association="Self.FK_Vehicles_VehicleType">
+            <End Role="VehicleTypes" EntitySet="VehicleTypes" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -1512,6 +1568,17 @@
                 <ScalarProperty Name="AvailableDate" ColumnName="AvailableDate" />
                 <ScalarProperty Name="UnderOffer" ColumnName="UnderOffer" />
                 <ScalarProperty Name="ProprietorId" ColumnName="ProprietorId" />
+                <ScalarProperty Name="VehicleTypeId" ColumnName="VehicleTypeId" />
+                <ScalarProperty Name="VehicleMake" ColumnName="VehicleMake" />
+                <ScalarProperty Name="IsLivery" ColumnName="IsLivery" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleTypes">
+            <EntityTypeMapping TypeName="Model.VehicleType">
+              <MappingFragment StoreEntitySet="VehicleTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
