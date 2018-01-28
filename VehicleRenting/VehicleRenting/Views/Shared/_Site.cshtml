@@ -161,6 +161,7 @@
                         <option value="5">$1600 - </option>
                     </select>
                     <input type="submit" value="Search" form="form-search" />
+                    <button id="list-all" type="button" style="padding:1em 1.5em; border: 1px solid black; background-color: transparent; font-size: 14px" onclick="window.location.href = '@Url.Action("ListAllVehicles", "Home")'">List All</button>
                 </div>
             </div>
         </header>
@@ -202,5 +203,7 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
+
+        
     </body>
 </html>

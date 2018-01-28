@@ -98,6 +98,12 @@ namespace VehicleRenting.Controllers
             return View(vehicleList);
         }
 
+        public ActionResult ListAllVehicles()
+        {
+            var vehicleList = db.Vehicles.ToList();
+            return View("Search", vehicleList);
+        }
+
         public ActionResult BookAppointment(int vehicleId)
         {
             var vehicle = db.Vehicles.Find(vehicleId);
